@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Acr.Settings</id>
+        <version>3.0.0</version>
+        <title>Settings Xplat Plugin for Xamarin and Windows</title>
+        <description>Settings Xplat Plugin for Xamarin and Windows</description>
+        <authors>Allan Ritchie</authors>
+        <owners>Allan Ritchie</owners>
+        <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+        <projectUrl>https://github.com/aritchie/acrsettings</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <tags>xamarin xam.pcl settings</tags>
+        <dependencies>
+            <dependency id="Newtonsoft.Json" version="[6.0.7, 7)" />
+        </dependencies>
+        <releaseNotes>
+3.0.0
+Moving to bait and switch design
+
+2.1.1
+Fix iOS Settings issue
+
+2.1
+Better structure to observable dictionary of settings
+FIX: bug with resync calling clear event which removes some necessary iOS settings
+
+2.0
+Now works as an observable observable dictionary
+New extension methods for supporting several other data types
+
+1.0
+Initial Release
+        </releaseNotes>
+    </metadata>
+    <files>
+        <!-- PCL -->
+        <file src="..\src\Acr.Settings\Release\bin\Acr.Settings.dll" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.Settings.dll" />
+
+        <!-- android -->
+        <file src="..\src\Acr.Settings.Android\bin\Release\Acr.Settings.dll" target="lib\MonoAndroid10\Acr.Settings.dll" />
+
+        <!-- ios -->
+        <file src="..\src\Acr.Settings.iOS\bin\iPhone\Release\Acr.Settings.dll" target="lib\Xamarin.iOS10\Acr.Settings.dll" />
+
+        <!-- win universal -->
+        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.dll" target="lib\wp8\Acr.Settings.dll" />
+    </files>
+</package>

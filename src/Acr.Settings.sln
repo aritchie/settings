@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.Settings", "Acr.Settings\Acr.Settings.csproj", "{7E9E7C1C-9235-4D46-BF4C-CA6A0C8B6E29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.Settings.iOS", "Acr.Settings.iOS\Acr.Settings.iOS.csproj", "{2E4D0D6A-CE0C-447D-AC16-2143B62A6B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.Settings.Interfaces", "Acr.Settings.Interfaces\Acr.Settings.Interfaces.csproj", "{9715596D-F7C9-4F4E-8102-EB2F29682FB2}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Acr.Settings.Shared", "Acr.Settings.Shared\Acr.Settings.Shared.shproj", "{62F5D64A-791E-460B-AFC4-AF26673EA4CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{95E24DC3-BFE7-4F15-9F1E-86DEB394F3E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.Settings.Android", "Acr.Settings.Android\Acr.Settings.Android.csproj", "{B1019C4B-E37A-4B75-9AFC-980820320B6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.Settings.Windows", "Acr.Settings.Windows\Acr.Settings.Windows.csproj", "{880248EE-2496-4516-837C-C6724AFA46B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB0D1345-2F41-41ED-9D4E-78BDD9860AFF}"
+	ProjectSection(SolutionItems) = preProject
+		..\nuspec\Acr.Settings.nuspec = ..\nuspec\Acr.Settings.nuspec
+		..\nuspec\pack.cmd = ..\nuspec\pack.cmd
+		..\nuspec\push.cmd = ..\nuspec\push.cmd
+		..\readme.md = ..\readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Acr.Settings.Shared\Acr.Settings.Shared.projitems*{62f5d64a-791e-460b-afc4-af26673ea4ce}*SharedItemsImports = 13
+		Acr.Settings.Shared\Acr.Settings.Shared.projitems*{2e4d0d6a-ce0c-447d-ac16-2143b62a6b25}*SharedItemsImports = 4
+		Acr.Settings.Shared\Acr.Settings.Shared.projitems*{b1019c4b-e37a-4b75-9afc-980820320b6b}*SharedItemsImports = 4
+		Acr.Settings.Shared\Acr.Settings.Shared.projitems*{7e9e7c1c-9235-4d46-bf4c-ca6a0c8b6e29}*SharedItemsImports = 4
+		Acr.Settings.Shared\Acr.Settings.Shared.projitems*{880248ee-2496-4516-837c-c6724afa46b3}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E9E7C1C-9235-4D46-BF4C-CA6A0C8B6E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E9E7C1C-9235-4D46-BF4C-CA6A0C8B6E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E9E7C1C-9235-4D46-BF4C-CA6A0C8B6E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E9E7C1C-9235-4D46-BF4C-CA6A0C8B6E29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E4D0D6A-CE0C-447D-AC16-2143B62A6B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E4D0D6A-CE0C-447D-AC16-2143B62A6B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E4D0D6A-CE0C-447D-AC16-2143B62A6B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E4D0D6A-CE0C-447D-AC16-2143B62A6B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9715596D-F7C9-4F4E-8102-EB2F29682FB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9715596D-F7C9-4F4E-8102-EB2F29682FB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9715596D-F7C9-4F4E-8102-EB2F29682FB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9715596D-F7C9-4F4E-8102-EB2F29682FB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1019C4B-E37A-4B75-9AFC-980820320B6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1019C4B-E37A-4B75-9AFC-980820320B6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1019C4B-E37A-4B75-9AFC-980820320B6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1019C4B-E37A-4B75-9AFC-980820320B6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{880248EE-2496-4516-837C-C6724AFA46B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{880248EE-2496-4516-837C-C6724AFA46B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{880248EE-2496-4516-837C-C6724AFA46B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{880248EE-2496-4516-837C-C6724AFA46B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7E9E7C1C-9235-4D46-BF4C-CA6A0C8B6E29} = {95E24DC3-BFE7-4F15-9F1E-86DEB394F3E2}
+		{2E4D0D6A-CE0C-447D-AC16-2143B62A6B25} = {95E24DC3-BFE7-4F15-9F1E-86DEB394F3E2}
+		{B1019C4B-E37A-4B75-9AFC-980820320B6B} = {95E24DC3-BFE7-4F15-9F1E-86DEB394F3E2}
+		{880248EE-2496-4516-837C-C6724AFA46B3} = {95E24DC3-BFE7-4F15-9F1E-86DEB394F3E2}
+	EndGlobalSection
+EndGlobal
