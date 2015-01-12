@@ -9,7 +9,10 @@
     <Import_RootNamespace>Acr.Settings</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SettingsDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ObservableDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
   </ItemGroup>
 </Project>

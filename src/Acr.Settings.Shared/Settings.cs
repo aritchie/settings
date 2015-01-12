@@ -30,5 +30,34 @@ namespace Acr.Settings {
         public static ISettingsDictionary All {
             get { return Instance.All; }
         }
+
+
+        public static string Get(string key, string defaultValue = null) {
+            return Instance.Get(key, defaultValue);
+        }
+
+
+        public static void Set(string key, string value) {
+            Instance.Set(key, value);
+        }
+
+
+        public static void Remove(string key) {
+            Instance.Remove(key);
+        }
+
+
+        public static bool Contains(string key) {
+            return Instance.Contains(key);
+        }
+
+        public static void Clear() {
+            Instance.Clear();
+        }
+
+
+        public static void Resync() {
+            Instance.Resync();
+        }
     }
 }
