@@ -1,43 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Windows.Storage;
 
 
 namespace Acr.Settings.Windows {
-    public class SettingsImpl : ISettings {
 
-        public ISettingsDictionary All {
-            get { throw new NotImplementedException(); }
+    public class SettingsImpl : AbstractSettings {
+
+        protected override IDictionary<string, string> GetNativeSettings() {
+            return ApplicationData
+                .Current
+                .LocalSettings
+                .Values
+                .ToDictionary(
+                    x => x.Key,
+                    x => x.Value.ToString()
+                );
         }
 
 
-        public string Get(string key, string defaultValue = null) {
-            throw new NotImplementedException();
+        protected override void AddOrUpdateNative(IEnumerable<KeyValuePair<string, string>> saves) {
+            var list = ApplicationData.Current.LocalSettings.Values;
+            foreach (var save in saves)
+                list[save.Key] = save.Value;
         }
 
 
-        public void Set(string key, string value) {
-            throw new NotImplementedException();
+        protected override void RemoveNative(IEnumerable<KeyValuePair<string, string>> deletes) {
+            var list = ApplicationData.Current.LocalSettings.Values;
+            foreach (var del in deletes)
+                if (list.ContainsKey(del.Key))
+                    list.Remove(del.Key);
         }
 
 
-        public void Remove(string key) {
-            throw new NotImplementedException();
-        }
-
-
-        public void Clear() {
-            throw new NotImplementedException();
-        }
-
-
-        public void Resync() {
-            //ApplicationData.Current.LocalSettings
-            throw new NotImplementedException();
-        }
-
-
-        public bool Contains(string key) {
-            throw new NotImplementedException();
+        protected override void ClearNative() {
+            ApplicationData.Current.LocalSettings.Values.Clear();
         }
     }
 }
