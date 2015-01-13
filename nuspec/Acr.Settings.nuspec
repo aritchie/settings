@@ -35,7 +35,7 @@ Initial Release
     </metadata>
     <files>
         <!-- PCL -->
-        <file src="..\src\Acr.Settings\Release\bin\Acr.Settings.dll" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.Settings.dll" />
+        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.dll" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.Settings.dll" />
 
         <!-- android -->
         <file src="..\src\Acr.Settings.Android\bin\Release\Acr.Settings.dll" target="lib\MonoAndroid10\Acr.Settings.dll" />
@@ -44,6 +44,6 @@ Initial Release
         <file src="..\src\Acr.Settings.iOS\bin\iPhone\Release\Acr.Settings.dll" target="lib\Xamarin.iOS10\Acr.Settings.dll" />
 
         <!-- win universal -->
-        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.dll" target="lib\wp8+wpa81\Acr.Settings.dll" />
+        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.dll" target="lib\portable-win81+wpa81\Acr.Settings.dll" />
     </files>
 </package>
