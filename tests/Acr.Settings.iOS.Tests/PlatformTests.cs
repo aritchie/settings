@@ -9,7 +9,7 @@ namespace Acr.Settings.iOS.Tests {
     public class PlatformTests : TestCases {
 
         protected override ISettings CreateInstance() {
-            throw new SettingsImpl();
+            return new SettingsImpl();
         }
     }
 }

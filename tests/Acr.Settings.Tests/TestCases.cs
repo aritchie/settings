@@ -20,7 +20,6 @@ namespace Acr.Settings.Android.Tests {
 
         [Test]
         public void Resync() {
-            
         }
 
 
