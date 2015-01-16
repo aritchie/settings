@@ -22,7 +22,9 @@
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchI18n>
+    </MtouchI18n>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -45,9 +47,12 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
+    <IpaPackageName>
+    </IpaPackageName>
+    <MtouchI18n>
+    </MtouchI18n>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -89,13 +94,12 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Info.plist" />
-    <Compile Include="PlatformTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default.png" />
-    <BundleResource Include="Resources\Default@2x.png" />
-    <BundleResource Include="Resources\Default-568h@2x.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\Default-568h%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoTouch.NUnitLite" />
@@ -108,18 +112,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Acr.Settings.Interfaces\Acr.Settings.Interfaces.csproj">
-      <Project>{9715596d-f7c9-4f4e-8102-eb2f29682fb2}</Project>
+      <Project>{9715596D-F7C9-4F4E-8102-EB2F29682FB2}</Project>
       <Name>Acr.Settings.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Acr.Settings.iOS\Acr.Settings.iOS.csproj">
-      <Project>{2e4d0d6a-ce0c-447d-ac16-2143b62a6b25}</Project>
+      <Project>{2E4D0D6A-CE0C-447D-AC16-2143B62A6B25}</Project>
       <Name>Acr.Settings.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-    </ProjectReference>
-    <ProjectReference Include="..\Acr.Settings.Tests\Acr.Settings.Tests.csproj">
-      <Project>{df050e2b-1cbd-4f25-95fe-f68364d365ee}</Project>
-      <Name>Acr.Settings.Tests</Name>
+      <IsAppExtension>False</IsAppExtension>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\Acr.Settings.Tests\Acr.Settings.Tests.projitems" Label="Shared" Condition="Exists('..\Acr.Settings.Tests\Acr.Settings.Tests.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

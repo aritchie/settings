@@ -10,5 +10,11 @@ namespace Acr.Settings.Android.Tests {
         protected override ISettings CreateInstance() {
             return new SettingsImpl();
         }
+
+
+		[Test]
+		public override void GetDefault() {
+			return base.GetDefault();
+		}
     }
 }

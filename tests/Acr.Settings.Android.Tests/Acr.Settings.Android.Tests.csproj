@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{06FE0C81-97BD-46BA-84CA-E7E2E1284AAD}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
@@ -18,6 +16,7 @@
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <DevInstrumentationEnabled>True</DevInstrumentationEnabled>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,7 +26,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -38,7 +36,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -69,18 +66,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Acr.Settings.Android\Acr.Settings.Android.csproj">
-      <Project>{b1019c4b-e37a-4b75-9afc-980820320b6b}</Project>
+      <Project>{B1019C4B-E37A-4B75-9AFC-980820320B6B}</Project>
       <Name>Acr.Settings.Android</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Acr.Settings.Interfaces\Acr.Settings.Interfaces.csproj">
-      <Project>{9715596d-f7c9-4f4e-8102-eb2f29682fb2}</Project>
+      <Project>{9715596D-F7C9-4F4E-8102-EB2F29682FB2}</Project>
       <Name>Acr.Settings.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Acr.Settings.Tests\Acr.Settings.Tests.csproj">
-      <Project>{df050e2b-1cbd-4f25-95fe-f68364d365ee}</Project>
-      <Name>Acr.Settings.Tests</Name>
-    </ProjectReference>
   </ItemGroup>
+  <Import Project="..\Acr.Settings.Tests\Acr.Settings.Tests.projitems" Label="Shared" Condition="Exists('..\Acr.Settings.Tests\Acr.Settings.Tests.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
