@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Collections;
 
 
 namespace Acr.Settings {
@@ -20,7 +19,7 @@ namespace Acr.Settings {
 			if (this.Changed != null)
 				this.Changed(this, args);
 		}
-			
+
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             switch (e.Action) {
