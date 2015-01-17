@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Collections;
 
 
 namespace Acr.Settings {
@@ -15,18 +16,33 @@ namespace Acr.Settings {
 
         #region Internals
 
+		protected virtual void OnChanged(SettingChangeEventArgs args) {
+			if (this.Changed != null)
+				this.Changed(this, args);
+		}
+			
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             switch (e.Action) {
-                case NotifyCollectionChangedAction.Add:
+				case NotifyCollectionChangedAction.Add:
+					var adds = e.NewItems.Cast<KeyValuePair<string, string>>();
+					this.AddOrUpdateNative(adds);
+					foreach (var x in adds)
+						this.OnChanged(new SettingChangeEventArgs(SettingChangeAction.Add, x.Key, x.Value));
+					break;
+
                 case NotifyCollectionChangedAction.Replace:
-                    var saves = e.NewItems.Cast<KeyValuePair<string, string>>();
-                    this.AddOrUpdateNative(saves);
+                    var updates = e.NewItems.Cast<KeyValuePair<string, string>>();
+                    this.AddOrUpdateNative(updates);
+					foreach (var x in updates)
+						this.OnChanged(new SettingChangeEventArgs(SettingChangeAction.Update, x.Key, x.Value));
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
                     var dels = e.OldItems.Cast<KeyValuePair<string, string>>();
                     this.RemoveNative(dels);
+					foreach (var x in dels)
+						this.OnChanged(new SettingChangeEventArgs(SettingChangeAction.Remove, x.Key, x.Value));
                     break;
 
                 case NotifyCollectionChangedAction.Reset:
@@ -38,6 +54,9 @@ namespace Acr.Settings {
         #endregion
 
         #region ISettings Members
+
+		public event EventHandler<SettingChangeEventArgs> Changed;
+
 
         private ISettingsDictionary all;
         public ISettingsDictionary All {

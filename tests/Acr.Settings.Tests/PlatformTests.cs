@@ -1,6 +1,8 @@
 using System;
-using NUnit.Framework;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using NUnit.Framework;
 
 
 namespace Acr.Settings.Tests {
@@ -24,17 +26,15 @@ namespace Acr.Settings.Tests {
 
 		[Test]
 		public async void OnSettingChanged() {
-			string key = null;
+			SettingChangeEventArgs eventArgs = null;
+			this.settings.Changed += (sender, args) => eventArgs = args;
 
-			this.settings.All.CollectionChanged += (sender, e) => {
-//				e.NewItems
-			};
 			this.settings.Set("OnSettingChanged", "boo");
 			await Task.Delay(100);
 
-			var value = this.settings.Get("OnSettingChanged");
-			Assert.AreEqual("OnSettingChanged", key, "Event not fired");
-			Assert.AreEqual("foo", value, "Values not set");
+			Assert.AreEqual(SettingChangeAction.Add, eventArgs.Action);
+			Assert.AreEqual("OnSettingChanged", eventArgs.Key, "Event not fired");
+			Assert.AreEqual("boo", eventArgs.Value, "Values not set");
 		}
 
 

@@ -57,6 +57,8 @@
     <Compile Include="ISettings.cs" />
     <Compile Include="ISettingsDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingChangeEventArgs.cs" />
+    <Compile Include="SettingChangeAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
