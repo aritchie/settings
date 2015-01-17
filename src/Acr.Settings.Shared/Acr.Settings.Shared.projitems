@@ -10,6 +10,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISettingsDictionary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SettingChangeAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SettingChangeEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SettingsDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ObservableDictionary.cs" />
