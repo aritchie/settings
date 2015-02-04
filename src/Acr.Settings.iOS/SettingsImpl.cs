@@ -8,6 +8,7 @@ namespace Acr.Settings {
 
     public class SettingsImpl : AbstractSettings {
         private static readonly NSUserDefaults prefs = NSUserDefaults.StandardUserDefaults;
+
         public static readonly string[] ProtectedSettingsKeys = {
             "WebKitKerningAndLigaturesEnabledByDefault",
             "AppleLanguages",
@@ -22,29 +23,14 @@ namespace Acr.Settings {
         };
 
 
-        protected override IDictionary<string, string> GetNativeSettings() {
-            return prefs
-                .ToDictionary()
-                .ToDictionary(
-                    x => x.Key.ToString(), 
-                    x => x.Value.ToString()
-                )
-                .Where(x => this.CanTouch(x.Key))
-                .ToDictionary(x => x.Key, x => x.Value);
+        public override bool Contains(string key) {
+            return (prefs.ValueForKey(new NSString(key)) != null);
         }
 
 
-        protected override void AddOrUpdateNative(IEnumerable<KeyValuePair<string, string>> saves) {
-            foreach (var item in saves)
-                if (this.CanTouch(item.Key))
-                    prefs.SetString(item.Value, item.Key);
-
-            prefs.Synchronize();
-        }
-
-
-        protected override void RemoveNative(IEnumerable<KeyValuePair<string, string>> dels) {
-            foreach (var item in dels)
+        protected override void NativeClear() {
+            var values = this.NativeValues();
+            foreach (var item in values)
                 if (this.CanTouch(item.Key))
                     prefs.RemoveObject(item.Key);
 
@@ -52,18 +38,35 @@ namespace Acr.Settings {
         }
 
 
-        protected override void ClearNative() {
-            foreach (var item in this.All)
-                if (this.CanTouch(item.Key))
-                    prefs.RemoveObject(item.Key);
+        protected override string NativeGet(string key) {
+            return prefs.StringForKey(key);
+        }
 
-            //prefs.RemovePersistentDomain(NSBundle.MainBundle.BundleIdentifier);
+
+        protected override void NativeRemove(string key) {
+            prefs.RemoveObject(key);
             prefs.Synchronize();
+        }
+
+
+        protected override void NativeSet(string key, string value) {
+            prefs.SetString(key, value);
         }
 
 
         protected virtual bool CanTouch(string settingsKey) {
             return !ProtectedSettingsKeys.Any(x => x.Equals(settingsKey, StringComparison.CurrentCultureIgnoreCase));
+        }
+
+
+        protected override IDictionary<string, string> NativeValues() {
+            return prefs
+                .ToDictionary()
+                .Where(x => this.CanTouch(x.Key.ToString()))
+                .ToDictionary(
+                    x => x.Key.ToString(),
+                    x => x.Value.ToString()
+                );
         }
     }
 }

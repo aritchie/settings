@@ -9,39 +9,51 @@ using Android.Preferences;
 namespace Acr.Settings {
 
     public class SettingsImpl : AbstractSettings {
-        private static readonly ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(Application.Context.ApplicationContext);
+        private static readonly Lazy<ISharedPreferences> prefs = new Lazy<ISharedPreferences>(() => PreferenceManager.GetDefaultSharedPreferences(Application.Context.ApplicationContext));
 
 
-        protected override IDictionary<string, string> GetNativeSettings() {
-            return prefs.All.ToDictionary(y => y.Key, y => y.Value.ToString());
+        public override bool Contains(string key) {
+            return prefs.Value.Contains(key);
         }
 
 
-        protected override void AddOrUpdateNative(IEnumerable<KeyValuePair<string, string>> saves) {
-            using (var editor = prefs.Edit()) {
-                foreach (var item in saves)
-                    editor.PutString(item.Key, item.Value);
-
-                editor.Commit();
-            }
-        }
-
-
-        protected override void RemoveNative(IEnumerable<KeyValuePair<string, string>> deletes) {
-            using (var editor = prefs.Edit()) {
-                foreach (var item in deletes) 
-                    editor.Remove(item.Key);
-
-                editor.Commit();
-            }
-        }
-
-
-        protected override void ClearNative() {
-            using (var editor = prefs.Edit()) {
+        protected override void NativeClear() {
+            using (var editor = prefs.Value.Edit()) {
                 editor.Clear();
                 editor.Commit();
             }
+        }
+
+
+        protected override string NativeGet(string key) {
+            return prefs.Value.GetString(key, null);
+        }
+
+
+        protected override void NativeRemove(string key) {
+            using (var editor = prefs.Value.Edit()) {
+                editor.Remove(key);
+                editor.Commit();
+            }
+        }
+
+
+        protected override void NativeSet(string key, string value) {
+            using (var editor = prefs.Value.Edit()) {
+                editor.PutString(key, value);
+                editor.Commit();
+            }
+        }
+
+
+        protected override IDictionary<string, string> NativeValues() {
+            return prefs
+                .Value
+                .All
+                .ToDictionary(
+                    x => x.Key,
+                    x => x.Value.ToString()
+                );
         }
     }
 }

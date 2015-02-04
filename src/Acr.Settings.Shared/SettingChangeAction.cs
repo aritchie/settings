@@ -7,7 +7,8 @@ namespace Acr.Settings {
 
 		Add,
 		Update,
-		Remove
+		Remove,
+        Clear
 	}
 }
 

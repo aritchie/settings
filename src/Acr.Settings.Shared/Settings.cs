@@ -27,17 +27,18 @@ namespace Acr.Settings {
         }
 
 
-        public static ISettingsDictionary All {
-            get { return Instance.All; }
+        public static event EventHandler<SettingChangeEventArgs> Changed {
+            add { Instance.Changed += value; }
+            remove { Instance.Changed -= value; }
         }
 
 
-        public static string Get(string key, string defaultValue = null) {
+        public static T Get<T>(string key, T defaultValue = default(T)) {
             return Instance.Get(key, defaultValue);
         }
 
 
-        public static void Set(string key, string value) {
+        public static void Set<T>(string key, T value) {
             Instance.Set(key, value);
         }
 
@@ -51,13 +52,9 @@ namespace Acr.Settings {
             return Instance.Contains(key);
         }
 
+
         public static void Clear() {
             Instance.Clear();
-        }
-
-
-        public static void Resync() {
-            Instance.Resync();
         }
     }
 }

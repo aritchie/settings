@@ -1,18 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 
 namespace Acr.Settings {
 
     public interface ISettings {
 
-        ISettingsDictionary All { get; }
+        IReadOnlyDictionary<string, string> List { get; }
 		event EventHandler<SettingChangeEventArgs> Changed;
 
-        string Get(string key, string defaultValue = null);
-        void Set(string key, string value);
-        void Remove(string key);
-        void Clear();
-        void Resync();
+        T Get<T>(string key, T defaultValue = default(T));
+        void Set<T>(string key, T value);
+        bool Remove(string key);
         bool Contains(string key);
+        void Clear();
     }
 }

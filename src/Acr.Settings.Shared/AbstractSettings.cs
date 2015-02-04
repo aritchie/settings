@@ -1,116 +1,177 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
+using System.Collections.ObjectModel;
+using Newtonsoft.Json;
 
 
 namespace Acr.Settings {
 
     public abstract class AbstractSettings : ISettings {
-
-        protected abstract IDictionary<string, string> GetNativeSettings();
-        protected abstract void AddOrUpdateNative(IEnumerable<KeyValuePair<string, string>> saves);
-        protected abstract void RemoveNative(IEnumerable<KeyValuePair<string, string>> deletes);
-        protected abstract void ClearNative();
-
-        #region Internals
-
-		protected virtual void OnChanged(SettingChangeEventArgs args) {
-			if (this.Changed != null)
-				this.Changed(this, args);
-		}
+        public event EventHandler<SettingChangeEventArgs> Changed;
 
 
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-            switch (e.Action) {
-				case NotifyCollectionChangedAction.Add:
-					var adds = e.NewItems.Cast<KeyValuePair<string, string>>();
-					this.AddOrUpdateNative(adds);
-					foreach (var x in adds)
-						this.OnChanged(new SettingChangeEventArgs(SettingChangeAction.Add, x.Key, x.Value));
-					break;
-
-                case NotifyCollectionChangedAction.Replace:
-                    var updates = e.NewItems.Cast<KeyValuePair<string, string>>();
-                    this.AddOrUpdateNative(updates);
-					foreach (var x in updates)
-						this.OnChanged(new SettingChangeEventArgs(SettingChangeAction.Update, x.Key, x.Value));
-                    break;
-
-                case NotifyCollectionChangedAction.Remove:
-                    var dels = e.OldItems.Cast<KeyValuePair<string, string>>();
-                    this.RemoveNative(dels);
-					foreach (var x in dels)
-						this.OnChanged(new SettingChangeEventArgs(SettingChangeAction.Remove, x.Key, x.Value));
-                    break;
-
-                case NotifyCollectionChangedAction.Reset:
-                    this.ClearNative();
-                    break;
-            }
-        }
-
-        #endregion
-
-        #region ISettings Members
-
-		public event EventHandler<SettingChangeEventArgs> Changed;
+        public virtual IReadOnlyDictionary<string, string> List { get; protected set; }
 
 
-        private ISettingsDictionary all;
-        public ISettingsDictionary All {
-            get {
-                if (this.all == null)
-                    this.Resync();
+        public virtual T Get<T>(string key, T defaultValue = default(T)) {
+            if (!this.Contains(key))
+                return defaultValue;
 
-                return this.all;
-            }
+            var @string = this.NativeGet(key);
+            var obj = this.Deserialize<T>(@string);
+            return obj;
         }
 
 
-        /// <summary>
-        /// This resynchronizes the settings from the native settings dictionary
-        /// </summary>
-        /// <param name="dictionary"></param>
-        public void Resync() {
-            if (this.all != null) {
-                this.all.CollectionChanged -= this.OnCollectionChanged;
-                this.all = null;
-            }
-            var settings = this.GetNativeSettings();
-            this.all = new SettingsDictionary(settings);
-            this.all.CollectionChanged += this.OnCollectionChanged;
+        public virtual void Set<T>(string key, T value) {
+            var action = this.Contains(key)
+                ? SettingChangeAction.Update
+                : SettingChangeAction.Add;
+
+            var @string = this.Serialize<T>(value);
+            this.NativeSet(key, @string);
+            this.OnChanged(new SettingChangeEventArgs(action, key,  value));
         }
 
 
-        public virtual string Get(string key, string defaultValue = null) {
-            return (this.All.ContainsKey(key)
-                ? this.All[key]
-                : defaultValue
-            );
-        }
+        public virtual bool Remove(string key) {
+            if (!this.Contains(key))
+                return false;
 
-
-        public virtual void Set(string key, string value) {
-            this.All[key] = value;
-        }
-
-
-        public virtual void Remove(string key) {
-            if (this.All.ContainsKey(key))
-                this.All.Remove(key);
+            this.NativeRemove(key);
+            return true;
         }
 
 
         public virtual void Clear() {
-            this.All.Clear();
+            this.NativeClear();
+            this.OnChanged(new SettingChangeEventArgs(SettingChangeAction.Clear, null, null));
         }
 
 
-        public virtual bool Contains(string key) {
-            return this.All.ContainsKey(key);
+		protected virtual void OnChanged(SettingChangeEventArgs args) {
+			if (this.Changed != null)
+				this.Changed(this, args);
+
+            var native = this.NativeValues();
+            this.List = new ReadOnlyDictionary<string, string>(native);
+		}
+
+
+        protected virtual string Serialize<T>(object value) {
+            var t = typeof(T);
+            if (t.GetGenericTypeDefinition() == typeof(Nullable<>))
+                t = Nullable.GetUnderlyingType(t);
+
+            if (t == typeof(string))
+                return (string)value;
+
+            if (this.IsStringifyType(t))
+                return value.ToString();
+
+            return JsonConvert.SerializeObject(value);
         }
 
-        #endregion
+
+        protected virtual T Deserialize<T>(string value) {
+            object result = null;
+            var t = typeof(T);
+            if (t.GetGenericTypeDefinition() == typeof(Nullable<>))
+                t = Nullable.GetUnderlyingType(t);
+
+            if (t == typeof(string))
+                result = value;
+            else if (this.IsStringifyType(t))
+                result = (T)Convert.ChangeType(value, t);
+            else
+                result = JsonConvert.DeserializeObject<T>(value);
+
+            return (T)result;
+        }
+
+
+        protected virtual bool IsStringifyType(Type t) {
+            return (
+                t == typeof(DateTime) || 
+                t == typeof(DateTimeOffset) || 
+                t == typeof(bool) ||
+                t == typeof(short) ||
+                t == typeof(int) ||
+                t == typeof(long) ||
+                t == typeof(double) ||
+                t == typeof(float) ||
+                t == typeof(decimal)
+            );
+        }
+
+
+        public abstract bool Contains(string key);
+
+        protected abstract void NativeClear();
+        protected abstract string NativeGet(string key);
+        protected abstract void NativeRemove(string key);
+        protected abstract void NativeSet(string key, string value);
+        protected abstract IDictionary<string, string> NativeValues();
     }
 }
+
+
+
+//        public static bool SetIfNotSet<T>(this ISettings settings, string key, T obj) {
+//            if (!settings.Contains(key))
+//                settings.Set(key, JsonConvert.SerializeObject(obj));
+//        }
+
+
+//        public static int GetInt(this ISettings settings, string key, int defaultValue = 0) {
+//            var value = settings.Get(key);
+//            var r = defaultValue;
+//            if (!Int32.TryParse(value, out r))
+//                return defaultValue;
+
+//            return r;
+//        }
+
+
+//        public static long GetLong(this ISettings settings, string key, long defaultValue = 0) {
+//            return Int64.Parse(settings.Get(key, defaultValue.ToString()));
+//        }
+
+
+//        public static void SetDateTime(this ISettings settings, string key, DateTime dateTime) {
+//            settings.Set(key, dateTime.ToString());
+//        }
+
+
+//        public static DateTime? GetDateTime(this ISettings settings, string key, DateTime? defaultValue = null) {
+//            var s = settings.Get(key);
+//            if (s == null)
+//                return defaultValue;
+
+//            return DateTime.Parse(s);
+//        }
+
+
+//        public static void SetDateTimeOffset(this ISettings settings, string key, DateTimeOffset dateTime) {
+//            settings.Set(key, dateTime.ToString());
+//        }
+
+
+//        public static DateTimeOffset? GetDateTimeOffset(this ISettings settings, string key, DateTimeOffset? defaultValue = null) {
+//            var s = settings.Get(key);
+//            if (s == null)
+//                return defaultValue;
+
+//            return DateTimeOffset.Parse(s);
+//        }
+
+
+//        public static void SetTimeSpan(this ISettings settings, string key, TimeSpan ts) {
+//            settings.Set(key, ts.Ticks.ToString());
+//        }
+
+
+//        public static TimeSpan GetTimeSpan(this ISettings settings, string key) {
+//            var num = settings.GetLong(key, 0);
+//            return TimeSpan.FromTicks(num);
+//        }

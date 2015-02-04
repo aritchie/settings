@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>3.0.0-beta1</version>
+        <version>3.0.0-beta6</version>
         <title>Settings Xplat Plugin for Xamarin and Windows</title>
         <description>Settings Xplat Plugin for Xamarin and Windows</description>
         <authors>Allan Ritchie</authors>
@@ -16,6 +16,7 @@
         </dependencies>
         <releaseNotes>
 3.0.0
+Vastly new underlying design and API
 Moving to bait and switch design
 
 2.1.1
