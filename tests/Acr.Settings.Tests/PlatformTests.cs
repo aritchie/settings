@@ -64,7 +64,6 @@ namespace Acr.Settings.Tests {
 
 
         [Test]
-        [Ignore]
         public void DateTimeNullTest() {
             var dt = new DateTime(1999, 12, 31, 23, 59, 0);
             var nvalue = this.settings.Get<DateTime?>("DateTimeNullTest");
@@ -102,6 +101,18 @@ namespace Acr.Settings.Tests {
             var flag = this.settings.Remove("Test");
             Assert.True(flag, "Remove should have returned success");
         }
+
+
+		[Test]
+		public void GuidTest() {
+			var guid = this.settings.Get<Guid>("GuidTest");
+			Assert.AreEqual(Guid.Empty, guid);
+
+			guid = new Guid();
+			this.settings.Set("GuidTest", guid);
+			var tmp = this.settings.Get<Guid>("GuidTest");
+			Assert.AreEqual(guid, tmp);
+		}
 
 
 		[Test]
