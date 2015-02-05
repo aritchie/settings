@@ -25,36 +25,5 @@ namespace Acr.Settings {
             }
             set { instance = value; }
         }
-
-
-        public static event EventHandler<SettingChangeEventArgs> Changed {
-            add { Instance.Changed += value; }
-            remove { Instance.Changed -= value; }
-        }
-
-
-        public static T Get<T>(string key, T defaultValue = default(T)) {
-            return Instance.Get(key, defaultValue);
-        }
-
-
-        public static void Set<T>(string key, T value) {
-            Instance.Set(key, value);
-        }
-
-
-        public static void Remove(string key) {
-            Instance.Remove(key);
-        }
-
-
-        public static bool Contains(string key) {
-            return Instance.Contains(key);
-        }
-
-
-        public static void Clear() {
-            Instance.Clear();
-        }
     }
 }

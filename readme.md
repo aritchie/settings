@@ -1,12 +1,21 @@
-﻿TODO
+﻿#ACR Xplat Settings Plugin for Xamarin and Windows
+To use, simply call:
 
-iOS/WinPhone/Win8: Settings.Init();
-Android: Settings.Init(Activity);
+    var guid = Settings.Get<Guid>("Key");
 
-MvvmCross in each platform setup:
-Init just like above
-Mvx.LazyConstructAndRegisterSingleton<ISettings, SettingsImpl>();
-Plugin version coming soon
+    Settings.Set("Key", AnyObject); // converts to JSON
+    var obj = Settings.Get<AnyObject>("Key");
 
-Any platform:
-Settings.Get(key, defaultValue);
+To supply your own implementation:
+
+    Settings.Instance = new YourImplementationInheritingISettings();
+
+
+Monitor setting changes:
+
+    Settings.Changed += (sender, args) => {
+        Console.WriteLine(args.Action);        
+        Console.WriteLine(args.Key);
+        Console.WriteLine(args.Value);
+    };
+
