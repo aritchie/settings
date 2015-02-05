@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using System.Reflection;
 
 
 namespace Acr.Settings {
@@ -30,7 +31,7 @@ namespace Acr.Settings {
 
             var @string = this.Serialize<T>(value);
             this.NativeSet(key, @string);
-            this.OnChanged(new SettingChangeEventArgs(action, key,  value));
+            this.OnChanged(new SettingChangeEventArgs(action, key, value));
         }
 
 
@@ -60,7 +61,7 @@ namespace Acr.Settings {
 
         protected virtual string Serialize<T>(object value) {
             var t = typeof(T);
-            if (t.GetGenericTypeDefinition() == typeof(Nullable<>))
+			if (t.GetTypeInfo().IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
                 t = Nullable.GetUnderlyingType(t);
 
             if (t == typeof(string))
@@ -76,7 +77,7 @@ namespace Acr.Settings {
         protected virtual T Deserialize<T>(string value) {
             object result = null;
             var t = typeof(T);
-            if (t.GetGenericTypeDefinition() == typeof(Nullable<>))
+			if (t.GetTypeInfo().IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
                 t = Nullable.GetUnderlyingType(t);
 
             if (t == typeof(string))

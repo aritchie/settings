@@ -50,7 +50,8 @@ namespace Acr.Settings {
 
 
         protected override void NativeSet(string key, string value) {
-            prefs.SetString(key, value);
+            prefs.SetString(value, key);
+			prefs.Synchronize();
         }
 
 
