@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>3.0.0</version>
-        <title>Settings Xplat Plugin for Xamarin and Windows</title>
+        <version>3.0.1</version>
+        <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
 A cross platform settings plugin for Xamarin iOS/Android and Windows Phone 8.  Unlike other libraries in this category though, you can serialize
@@ -19,6 +19,9 @@ just about anything.  It also has a change event to monitor for changes from oth
             <dependency id="Newtonsoft.Json" version="[6.0.8, 7)" />
         </dependencies>
         <releaseNotes>
+3.0.1
+Add an Init for stupid linker issues
+
 3.0.0
 Vastly new underlying design and API
 Moving to bait and switch design
