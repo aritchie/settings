@@ -6,8 +6,10 @@
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
-A cross platform settings plugin for Xamarin iOS/Android, and Windows Common.  Unlike other libraries in this category though, you can serialize
-just about anything.  It also has a change event to monitor for changes from other places in your app.
+A cross platform settings plugin for Xamarin and Windows.  Unlike other libraries in this category though, you can serialize
+just about anything.  You can also monitor changes to the settings.
+
+To start, make sure you call Settings.Init() in your platform project
         </description>
         <authors>Allan Ritchie</authors>
         <owners>Allan Ritchie</owners>
