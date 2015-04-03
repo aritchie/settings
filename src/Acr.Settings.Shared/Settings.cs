@@ -4,16 +4,21 @@
 namespace Acr.Settings {
 
     public static class Settings {
+
+#if __PLATFORM__
         private static ISettings instance;
 
 
         public static void Init() {
-            #if __PLATFORM__
             instance = new SettingsImpl();
-            #else
-            throw new Exception("Platform implementation not found.  Have you added a nuget reference to your platform project?");
-            #endif
         }
+
+#else
+        [Obsolete("This is the PCL version.  You should be adding the nuget package to your platform project and calling Init() there.")]
+        public static void Init() {
+            throw new Exception("This is the PCL version.  You should be adding the nuget package to your platform project and calling Init() there.");
+        }
+#endif
 
         public static ISettings Instance { get; set; }
     }
