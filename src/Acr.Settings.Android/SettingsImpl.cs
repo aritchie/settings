@@ -9,48 +9,53 @@ using Android.Preferences;
 namespace Acr.Settings {
 
     public class SettingsImpl : AbstractSettings {
-        private static readonly Lazy<ISharedPreferences> prefs = new Lazy<ISharedPreferences>(() => PreferenceManager.GetDefaultSharedPreferences(Application.Context.ApplicationContext));
+
+        private ISharedPreferences GetPreferences() {
+            var ctx = Application.Context.ApplicationContext;
+            return PreferenceManager.GetDefaultSharedPreferences(ctx);
+        }
+
+
+        private void UoW(Action<ISharedPreferencesEditor> doWork) {
+            using (var prefs = this.GetPreferences()) {
+                using (var editor = prefs.Edit()) {
+                    doWork(editor);
+                    editor.Commit();
+                }
+            }
+        }
 
 
         public override bool Contains(string key) {
-            return prefs.Value.Contains(key);
+            using (var prefs = this.GetPreferences())
+                return prefs.Contains(key);
         }
 
 
         protected override void NativeClear() {
-            using (var editor = prefs.Value.Edit()) {
-                editor.Clear();
-                editor.Commit();
-            }
+            this.UoW(x => x.Clear());
         }
 
 
         protected override string NativeGet(string key) {
-            return prefs.Value.GetString(key, null);
+            using (var prefs = this.GetPreferences())
+                return prefs.GetString(key, null);
         }
 
 
         protected override void NativeRemove(string key) {
-            using (var editor = prefs.Value.Edit()) {
-                editor.Remove(key);
-                editor.Commit();
-            }
+            this.UoW(x => x.Remove(key));
         }
 
 
         protected override void NativeSet(string key, string value) {
-            using (var editor = prefs.Value.Edit()) {
-                editor.PutString(key, value);
-                editor.Commit();
-            }
+            this.UoW(x => x.PutString(key, value));
         }
 
 
         protected override IDictionary<string, string> NativeValues() {
-            return prefs
-                .Value
-                .All
-                .ToDictionary(
+            using (var prefs = this.GetPreferences())
+                return prefs.All.ToDictionary(
                     x => x.Key,
                     x => x.Value.ToString()
                 );
