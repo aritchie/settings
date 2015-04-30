@@ -4,22 +4,19 @@
 namespace Acr.Settings {
 
     public static class Settings {
-
+        private static readonly Lazy<ISettings> instanceInit = new Lazy<ISettings>(() => {
 #if __PLATFORM__
-        private static ISettings instance;
-
-
-        public static void Init() {
-            instance = new SettingsImpl();
-        }
-
+            return new SettingsImpl();
 #else
-        [Obsolete("This is the PCL version.  You should be adding the nuget package to your platform project and calling Init() there.")]
-        public static void Init() {
-            throw new Exception("This is the PCL version.  You should be adding the nuget package to your platform project and calling Init() there.");
-        }
+            throw new ArgumentException("Platform plugin not found.  Did you reference the nuget package in your platform project?");
 #endif
+        }, false);
 
-        public static ISettings Instance { get; set; }
+
+        private static ISettings customInstance;
+        public static ISettings Instance {
+            get { return customInstance ?? instanceInit.Value; }
+            set { customInstance = value; }
+        }
     }
 }

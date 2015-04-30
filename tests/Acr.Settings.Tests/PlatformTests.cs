@@ -17,6 +17,13 @@ namespace Acr.Settings.Tests {
 		}
 
 
+
+        [Test]
+        public void PlatformInit() {
+            Assert.NotNull(Settings.Instance);
+        }
+
+
 		[Test]
 		public async void OnSettingChanged() {
             var tcs = new TaskCompletionSource<SettingChangeEventArgs>();
