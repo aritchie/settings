@@ -26,8 +26,6 @@ namespace Acr.Settings.Android.Tests
 		
 		public static void UpdateIdValues()
 		{
-			global::Acr.Settings.Resource.String.ApplicationName = global::Acr.Settings.Android.Tests.Resource.String.ApplicationName;
-			global::Acr.Settings.Resource.String.Hello = global::Acr.Settings.Android.Tests.Resource.String.Hello;
 			global::Xamarin.Android.NUnitLite.Resource.Id.OptionHostName = global::Acr.Settings.Android.Tests.Resource.Id.OptionHostName;
 			global::Xamarin.Android.NUnitLite.Resource.Id.OptionPort = global::Acr.Settings.Android.Tests.Resource.Id.OptionPort;
 			global::Xamarin.Android.NUnitLite.Resource.Id.OptionRemoteServer = global::Acr.Settings.Android.Tests.Resource.Id.OptionRemoteServer;

@@ -11,6 +11,8 @@ namespace Acr.Settings {
         public event EventHandler<SettingChangeEventArgs> Changed;
 
 
+        public bool IsRoamingProfile { get; protected set; }
+
         public virtual IReadOnlyDictionary<string, string> List { get; protected set; }
 
 
@@ -103,8 +105,8 @@ namespace Acr.Settings {
 
         protected virtual bool IsStringifyType(Type t) {
             return (
-                t == typeof(DateTime) || 
-                t == typeof(DateTimeOffset) || 
+                t == typeof(DateTime) ||
+                t == typeof(DateTimeOffset) ||
                 t == typeof(bool) ||
                 t == typeof(short) ||
                 t == typeof(int) ||

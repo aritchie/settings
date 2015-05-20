@@ -7,36 +7,44 @@ using Windows.Storage;
 namespace Acr.Settings {
 
     public class SettingsImpl : AbstractSettings {
+        private readonly ApplicationDataContainer container;
+
+
+        public SettingsImpl(bool isRoaming = false) {
+            this.IsRoamingProfile = isRoaming;
+            this.container = this.IsRoamingProfile
+                ? ApplicationData.Current.RoamingSettings
+                : ApplicationData.Current.LocalSettings;
+        }
+
 
         public override bool Contains(string key) {
-            return ApplicationData.Current.LocalSettings.Values.ContainsKey(key);
+            return this.container.Values.ContainsKey(key);
         }
 
 
         protected override void NativeClear() {
-            ApplicationData.Current.LocalSettings.Values.Clear();
+            this.container.Values.Clear();
         }
 
 
         protected override string NativeGet(string key) {
-            return (string)ApplicationData.Current.LocalSettings.Values[key];
+            return (string)this.container.Values[key];
         }
 
 
         protected override void NativeRemove(string key) {
-            ApplicationData.Current.LocalSettings.Values.Remove(key);
+            this.container.Values.Remove(key);
         }
 
 
         protected override void NativeSet(string key, string value) {
-            ApplicationData.Current.LocalSettings.Values[key] = value;
+            this.container.Values[key] = value;
         }
 
 
         protected override IDictionary<string, string> NativeValues() {
-            return ApplicationData
-                .Current
-                .LocalSettings
+            return this.container
                 .Values
                 .ToDictionary(
                     x => x.Key,

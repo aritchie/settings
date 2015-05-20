@@ -6,6 +6,8 @@ namespace Acr.Settings {
 
     public interface ISettings {
 
+        bool IsRoamingProfile { get; }
+
         /// <summary>
         /// List current values from settings store
         /// </summary>

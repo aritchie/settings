@@ -7,7 +7,15 @@ using Foundation;
 namespace Acr.Settings {
 
     public class SettingsImpl : AbstractSettings {
-        private static readonly NSUserDefaults prefs = NSUserDefaults.StandardUserDefaults;
+        private readonly NSUserDefaults prefs; // = NSUserDefaults.StandardUserDefaults;
+
+
+        public SettingsImpl(string nameSpace) {
+            this.prefs = nameSpace == null
+                ? NSUserDefaults.StandardUserDefaults
+                : new NSUserDefaults(nameSpace, NSUserDefaultsType.SuiteName);
+        }
+
 
         public static readonly string[] ProtectedSettingsKeys = {
             "WebKitKerningAndLigaturesEnabledByDefault",

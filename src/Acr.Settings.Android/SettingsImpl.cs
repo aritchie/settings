@@ -9,10 +9,19 @@ using Android.Preferences;
 namespace Acr.Settings {
 
     public class SettingsImpl : AbstractSettings {
+        private readonly string nameSpace;
+
+        public SettingsImpl(string nameSpace) {
+            this.nameSpace = nameSpace;
+            this.IsRoamingProfile = (nameSpace != null);
+        }
+
 
         private ISharedPreferences GetPreferences() {
             var ctx = Application.Context.ApplicationContext;
-            return PreferenceManager.GetDefaultSharedPreferences(ctx);
+            return this.nameSpace == null
+                ? PreferenceManager.GetDefaultSharedPreferences(ctx)
+                : ctx.GetSharedPreferences(this.nameSpace, FileCreationMode.Append);
         }
 
 
