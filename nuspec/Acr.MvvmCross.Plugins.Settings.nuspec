@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.MvvmCross.Plugins.Settings</id>
-        <version>3.0.0</version>
+        <version>3.0.1</version>
         <title>MvvmCross Settings Plugin</title>
         <description>Settings platform plugin for MvvmCross (iOS, Android, and Windows Phone)</description>
         <authors>Allan Ritchie</authors>
@@ -16,12 +16,12 @@
             <dependency id="MvvmCross.HotTuna.CrossCore" version="[3.5, 4.0)" />
         </dependencies>
         <releaseNotes>
-Built on Acr.Settings
+Profile 259 on PCL
         </releaseNotes>
     </metadata>
     <files>
         <!-- PCL -->
-        <file src="..\src\Acr.MvvmCross.Plugins.Settings\bin\Release\Acr.MvvmCross.Plugins.Settings.dll" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.MvvmCross.Plugins.Settings.dll" />
+        <file src="..\src\Acr.MvvmCross.Plugins.Settings\bin\Release\Acr.MvvmCross.Plugins.Settings.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Acr.MvvmCross.Plugins.Settings.dll" />
 
         <!-- droid -->
         <file src="..\src\Acr.MvvmCross.Plugins.Settings\bin\Release\Acr.MvvmCross.Plugins.Settings.dll" target="lib\MonoAndroid10\Acr.MvvmCross.Plugins.Settings.dll" />

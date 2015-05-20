@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>3.0.3</version>
+        <version>3.0.4</version>
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
@@ -21,6 +21,9 @@ To start, make sure you call Settings.Init() in your platform project
             <dependency id="Newtonsoft.Json" version="[6.0.8, 7)" />
         </dependencies>
         <releaseNotes>
+3.0.4
+Fix nuspec - profile 259 pcl
+
 3.0.3
 Init is no longer necessary
 
