@@ -3,7 +3,11 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
 
 * You can store/retrieve just about any type of object (thanks to Newtonsoft.Json)
 * You can monitor for changes using the Changed event
-* You can use roaming profiles which is useful for iOS app groups and android wear.
+* You can use roaming profiles which is useful for:
+    * iOS app groups
+    * iOS extensions
+    * iWatch
+    * Android Wear
 
 
 ##To use, simply call:
