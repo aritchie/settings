@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>4.0.1</version>
+        <version>4.0.2</version>
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
@@ -21,6 +21,12 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
             <dependency id="Newtonsoft.Json" version="[6.0.8, 7)" />
         </dependencies>
         <releaseNotes>
+4.0.2
+New iOS iCloud settings implementation
+
+4.0.1
+Fixes to android profile
+
 4.0.0
 New roaming profile feature
 BREAKING - Settings.Instance has been renamed to Settings.Local

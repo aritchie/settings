@@ -33,6 +33,7 @@
     <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;__PLATFORM__</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="iCloudSettingsImpl.cs" />
     <Compile Include="SettingsImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
