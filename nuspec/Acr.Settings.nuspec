@@ -6,10 +6,12 @@
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
-A cross platform settings plugin for Xamarin and Windows.  Unlike other setting libraries in the wild, this library has 3 unique features:
-- You can store/retrieve just about any type of object (thanks to Newtonsoft.Json)
-- You can monitor for changes using the Changed event
-- You can use roaming profiles which is useful for iOS app groups, iOS extensions, iWatch, and Android Wear
+A cross platform settings plugin for Xamarin and Windows.  Unlike other setting libraries in the wild, this library provides several unique features
+
+* You can store/retrieve just about any type of object (thanks to Newtonsoft.Json)
+* You can monitor for changes using the Changed event
+* iCloud Settings Provider
+* You can use roaming profiles which is useful for iOS app groups, iOS extensions, iWatch, and Android Wear
         </description>
         <authors>Allan Ritchie</authors>
         <owners>Allan Ritchie</owners>
