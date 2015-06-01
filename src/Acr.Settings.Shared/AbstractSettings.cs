@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Newtonsoft.Json;
 using System.Reflection;
 
@@ -12,17 +13,22 @@ namespace Acr.Settings {
 
 
         public bool IsRoamingProfile { get; protected set; }
-
+        public List<string> KeysNotToClear { get; set; }
         public virtual IReadOnlyDictionary<string, string> List { get; protected set; }
+
+
+        protected AbstractSettings() {
+            this.KeysNotToClear = new List<string>();
+        }
 
 
         public virtual T Get<T>(string key, T defaultValue = default(T)) {
             if (!this.Contains(key))
                 return defaultValue;
 
-            var @string = this.NativeGet(key);
-            var obj = this.Deserialize<T>(@string);
-            return obj;
+            var type = this.UnwrapType(typeof(T));
+            var value = this.NativeGet(type, key);
+            return (T)value;
         }
 
 
@@ -31,18 +37,23 @@ namespace Acr.Settings {
                 ? SettingChangeAction.Update
                 : SettingChangeAction.Add;
 
-            var @string = this.Serialize<T>(value);
-            this.NativeSet(key, @string);
-            this.OnChanged(new SettingChangeEventArgs(action, key, value));
+            if (EqualityComparer<T>.Default.Equals(value, default(T)))
+                this.Remove(key);
+
+            else {
+                var type = this.UnwrapType(typeof(T));
+                this.NativeSet(type, key, value);
+                this.OnChanged(new SettingChangeEventArgs(action, key, value));
+            }
         }
 
 
         public virtual bool SetDefault<T>(string key, T value) {
-            if (!this.Contains(key))
+            if (this.Contains(key))
                 return false;
 
-            var @string = this.Serialize<T>(value);
-            this.NativeSet(key, @string);
+            var type = this.UnwrapType(typeof(T));
+            this.NativeSet(type, key, value);
             return true;
         }
 
@@ -71,35 +82,38 @@ namespace Acr.Settings {
 		}
 
 
-        protected virtual string Serialize<T>(object value) {
-            var t = typeof(T);
-			if (t.GetTypeInfo().IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
-                t = Nullable.GetUnderlyingType(t);
-
-            if (t == typeof(string))
+        protected virtual string Serialize(Type type, object value) {
+            if (type == typeof(string))
                 return (string)value;
 
-            if (this.IsStringifyType(t))
+            if (this.IsStringifyType(type))
                 return value.ToString();
 
             return JsonConvert.SerializeObject(value);
         }
 
 
-        protected virtual T Deserialize<T>(string value) {
-            object result = null;
-            var t = typeof(T);
-			if (t.GetTypeInfo().IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
-                t = Nullable.GetUnderlyingType(t);
+        protected virtual object Deserialize(Type type, string value) {
+            if (type == typeof(string))
+                return value;
 
-            if (t == typeof(string))
-                result = value;
-            else if (this.IsStringifyType(t))
-                result = (T)Convert.ChangeType(value, t);
-            else
-                result = JsonConvert.DeserializeObject<T>(value);
+            if (this.IsStringifyType(type))
+                return Convert.ChangeType(value, type);
 
-            return (T)result;
+            return JsonConvert.DeserializeObject(value, type);
+        }
+
+
+        protected virtual bool ShouldClear(string key) {
+            return !this.KeysNotToClear.Any(x => x.Equals(key));
+        }
+
+
+        protected virtual Type UnwrapType(Type type) {
+			if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                type = Nullable.GetUnderlyingType(type);
+
+            return type;
         }
 
 
@@ -121,9 +135,9 @@ namespace Acr.Settings {
         public abstract bool Contains(string key);
 
         protected abstract void NativeClear();
-        protected abstract string NativeGet(string key);
+        protected abstract object NativeGet(Type type, string key);
+        protected abstract void NativeSet(Type type, string key, object value);
         protected abstract void NativeRemove(string key);
-        protected abstract void NativeSet(string key, string value);
         protected abstract IDictionary<string, string> NativeValues();
     }
 }

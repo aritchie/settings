@@ -9,6 +9,11 @@ namespace Acr.Settings {
         bool IsRoamingProfile { get; }
 
         /// <summary>
+        /// Any values in this list will not be removed using clear
+        /// </summary>
+        List<string> KeysNotToClear { get; }
+
+        /// <summary>
         /// List current values from settings store
         /// </summary>
         IReadOnlyDictionary<string, string> List { get; }

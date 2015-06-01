@@ -24,22 +24,29 @@ namespace Acr.Settings {
 
 
         protected override void NativeClear() {
-            this.container.Values.Clear();
+            var keys = this.container
+                .Values
+                .Where(x => this.ShouldClear(x.Key))
+                .Select(x => x.Key)
+                .ToList();
+
+            foreach (var key in keys)
+                this.container.Values.Remove(key);
         }
 
 
-        protected override string NativeGet(string key) {
-            return (string)this.container.Values[key];
+        protected override object NativeGet(Type type, string key) {
+            return this.container.Values[key];
+        }
+
+
+        protected override void NativeSet(Type type, string key, object value) {
+            this.container.Values[key] = value;
         }
 
 
         protected override void NativeRemove(string key) {
             this.container.Values.Remove(key);
-        }
-
-
-        protected override void NativeSet(string key, string value) {
-            this.container.Values[key] = value;
         }
 
 

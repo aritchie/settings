@@ -1,8 +1,9 @@
-﻿#ACR Xplat Settings Plugin for Xamarin and Windows
-A cross platform settings plugin for Xamarin and Windows.  Unlike other setting libraries in the wild, this provides 3 unique features
+﻿#ACR Settings Plugin for Xamarin and Windows
+A cross platform settings plugin for Xamarin and Windows.  Unlike other setting libraries in the wild, this library provides several unique features
 
 * You can store/retrieve just about any type of object (thanks to Newtonsoft.Json)
 * You can monitor for changes using the Changed event
+* iCloud Settings Provider
 * You can use roaming profiles which is useful for:
     * iOS app groups
     * iOS extensions
@@ -22,15 +23,21 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
 Used for things like iOS app groups and android wear.  It works the same way as Local (substitute with Roaming), but requires initialization.
 The namespace setting only applies to iOS and Android.
 
-Android/iOS
-    Settings.InitRoaming("your app namespace");
+Android
+    Launch Activity - Settings.InitRoaming("your app namespace");
+
+iOS
+    AppDelegate - Settings.InitRoaming("your app namespace");
 
 Windows
     Settings.InitRoaming();
 
+iOS iCloud
+    AppDelegate - Settings.Roaming = new Acr.Settings.iCloudSettingsImpl();
+
 ##To supply your own implementation:
 
-    Settings.Local = new YourImplementationInheritingISettings();    
+    Settings.Local = new YourImplementationInheritingISettings();
 
 
 ##Monitor setting changes:

@@ -16,7 +16,7 @@ namespace Acr.Settings.Tests {
         public void GlobalInstanceTest() {
             Acr.Settings.Settings.InitRoaming("acr.settings.tests");
             Assert.NotNull(Acr.Settings.Settings.Roaming);
-            Assert.IsFalse(Acr.Settings.Settings.Roaming.IsRoamingProfile, "Romaing profile NOT detected");
+            Assert.IsTrue(Acr.Settings.Settings.Roaming.IsRoamingProfile, "Romaing profile NOT detected");
         }
     }
 }

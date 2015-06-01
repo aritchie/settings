@@ -105,6 +105,15 @@ namespace Acr.Settings.Tests {
         }
 
 
+        [Test]
+        public void LongTest() {
+            long value = 1;
+            this.Settings.Set("LongTest", value);
+            var value2 = this.Settings.Get<long>("LongTest");
+            Assert.AreEqual(value, value2);
+        }
+
+
 		[Test]
 		public void GuidTest() {
 			var guid = this.Settings.Get<Guid>("GuidTest");
@@ -117,11 +126,53 @@ namespace Acr.Settings.Tests {
 		}
 
 
+        [Test]
+        public void SetNullRemoves() {
+            this.Settings.Set("SetNullRemoves", "Blah");
+            this.Settings.Set<string>("SetNullRemoves", null);
+            var contains = this.Settings.Contains("SetNullRemoves");
+            Assert.False(contains);
+        }
+
+
+        [Test]
+        public void SetDefaultTRemoves() {
+            long value = 1;
+            this.Settings.Set("SetDefaultTRemoves", value);
+            this.Settings.Set<long>("SetDefaultTRemoves", default(long));
+            var contains = this.Settings.Contains("SetDefaultTRemoves");
+            Assert.False(contains);
+        }
+
+
 		[Test]
-		public void GetDefault() {
+		public void GetDefaultParameter() {
 			var tmp = Guid.NewGuid().ToString();
-			var r = this.Settings.Get("GetDefault", tmp);
+			var r = this.Settings.Get("GetDefaultParameter", tmp);
 			Assert.AreEqual(r, tmp);
 		}
+
+
+        [Test]
+        public void TryDefaults() {
+            var flag = this.Settings.SetDefault("TryDefaults", "Initial Value");
+            Assert.True(flag, "Default value could not be set");
+
+            flag = this.Settings.SetDefault("TryDefaults", "Second Value");
+            Assert.False(flag, "Default value was set and should not have been");
+
+            var currentValue = this.Settings.Get<string>("TryDefaults");
+            Assert.AreEqual("Initial Value", currentValue);
+        }
+
+
+        [Test]
+        public void ClearPreserveList() {
+            this.Settings.Set("ClearPreserveTest", "Value");
+            this.Settings.KeysNotToClear.Add("ClearPreserveTest");
+            this.Settings.Clear();
+            var value = this.Settings.Get<string>("ClearPreserveTest");
+            Assert.AreEqual("Value", value);
+        }
     }
 }

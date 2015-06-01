@@ -8,24 +8,13 @@ namespace Acr.Settings {
 
     public class iCloudSettingsImpl : AbstractSettings {
 
-        //public iCloudSettingsImpl() {
-            //NSNotificationCenter.DefaultCenter.AddObserver(
-            //    NSUbiquitousKeyValueStore.DidChangeExternallyNotification,
-            //    x => {
-            //        //var reasonNumber = (NSNumber)x.UserInfo.ObjectForKey(NSUbiquitousKeyValueStore.ChangeReasonKey); .IntValue
-            //        var array = (NSArray)x.UserInfo.ObjectForKey(NSUbiquitousKeyValueStore.ChangedKeysKey);
-            ////    var changedKeysList = new List<string> ();
-            ////    for (uint i = 0; i < changedKeys.Count; i++) {
-            ////        var key = new NSString (changedKeys.ValueAt(i)); // resolve key to a string
-            ////        changedKeysList.Add (key);
-            ////    }
-            //    }
-            //);
-        //}
+        protected NSUbiquitousKeyValueStore Store {
+            get { return NSUbiquitousKeyValueStore.DefaultStore; }
+        }
 
 
         public override bool Contains(string key) {
-            return (NSUbiquitousKeyValueStore.DefaultStore.ValueForKey(new NSString(key)) != null);
+            return (this.Store.ValueForKey(new NSString(key)) != null);
         }
 
 
@@ -33,33 +22,75 @@ namespace Acr.Settings {
             var prefs = NSUbiquitousKeyValueStore.DefaultStore;
             var values = this.NativeValues();
             foreach (var item in values)
-                if (this.CanTouch(item.Key))
-                    prefs.RemoveObject(item.Key);
+                if (this.ShouldClear(item.Key))
+                    prefs.Remove(item.Key);
 
             prefs.Synchronize();
         }
 
 
-        protected override string NativeGet(string key) {
-            return NSUbiquitousKeyValueStore.DefaultStore.GetString(key);
+        protected override void NativeSet(Type type, string key, object value) {
+            var typeCode = Type.GetTypeCode(type);
+            switch (typeCode) {
+
+                case TypeCode.Boolean:
+                    this.Store.SetBool(key, (bool)value);
+                    break;
+
+                case TypeCode.Double:
+                    this.Store.SetDouble(key, (double)value);
+                    break;
+
+                case TypeCode.Int64:
+                    this.Store.SetLong(key, (long)value);
+                    break;
+
+                case TypeCode.String:
+                    this.Store.SetString(key, (string)value);
+                    break;
+
+                default:
+                    var @string = this.Serialize(type, value);
+                    this.Store.SetString(key, @string);
+                    break;
+            }
+
+            this.Store.Synchronize();
+        }
+
+
+        protected override object NativeGet(Type type, string key) {
+            var typeCode = Type.GetTypeCode(type);
+            switch (typeCode) {
+
+                case TypeCode.Boolean:
+                    return this.Store.GetBool(key);
+
+                case TypeCode.Double:
+                    return this.Store.GetDouble(key);
+
+                case TypeCode.Int64:
+                    return this.Store.GetLong(key);
+
+                case TypeCode.String:
+                    return this.Store.GetString(key);
+
+                default:
+                    var @string = this.Store.GetString(key);
+                    return this.Deserialize(type, @string);
+            }
         }
 
 
         protected override void NativeRemove(string key) {
-            NSUbiquitousKeyValueStore.DefaultStore.Remove(key);
-            NSUbiquitousKeyValueStore.DefaultStore.Synchronize();
-        }
-
-
-        protected override void NativeSet(string key, string value) {
-            NSUbiquitousKeyValueStore.DefaultStore.SetString(key, value);
-            NSUbiquitousKeyValueStore.DefaultStore.Synchronize();
+            this.Store.Remove(key);
+            this.Store.Synchronize();
         }
 
 
         protected override IDictionary<string, string> NativeValues() {
-            return NSUbiquitousKeyValueStore
-                .DefaultStore
+            return this
+                .Store
                 .ToDictionary()
                 .ToDictionary(
                     x => x.Key.ToString(),

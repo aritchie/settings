@@ -25,10 +25,10 @@ namespace Acr.Settings {
         }
 
 
-        private void UoW(Action<ISharedPreferencesEditor> doWork) {
+        private void UoW(Action<ISharedPreferences, ISharedPreferencesEditor> doWork) {
             using (var prefs = this.GetPreferences()) {
                 using (var editor = prefs.Edit()) {
-                    doWork(editor);
+                    doWork(prefs, editor);
                     editor.Commit();
                 }
             }
@@ -42,23 +42,81 @@ namespace Acr.Settings {
 
 
         protected override void NativeClear() {
-            this.UoW(x => x.Clear());
+            this.UoW((prefs, x) => {
+                 prefs
+                     .All
+                     .Keys
+                     .Where(this.ShouldClear)
+                     .ToList()
+                     .ForEach(y => x.Remove(y));
+            });
         }
 
 
-        protected override string NativeGet(string key) {
-            using (var prefs = this.GetPreferences())
-                return prefs.GetString(key, null);
+        protected override object NativeGet(Type type, string key) {
+            using (var prefs = this.GetPreferences()) {
+                var typeCode = Type.GetTypeCode(type);
+                switch (typeCode) {
+
+                    case TypeCode.Boolean:
+                        return prefs.GetBoolean(key, false);
+
+                    case TypeCode.Int32:
+                        return prefs.GetInt(key, 0);
+
+                    case TypeCode.Int64:
+                        return prefs.GetLong(key, 0);
+
+                    case TypeCode.Single:
+                        return prefs.GetFloat(key, 0);
+
+                    case TypeCode.String:
+                        return prefs.GetString(key, String.Empty);
+
+                    default:
+                        var @string = prefs.GetString(key, String.Empty);
+                        return this.Deserialize(type, @string);
+                }
+            }
+        }
+
+
+        protected override void NativeSet(Type type, string key, object value) {
+            this.UoW((prefs, x) => {
+                var typeCode = Type.GetTypeCode(type);
+                switch (typeCode) {
+
+                    case TypeCode.Boolean:
+                        x.PutBoolean(key, (bool)value);
+                        break;
+
+                    case TypeCode.Int32:
+                        x.PutInt(key, (int)value);
+                        break;
+
+                    case TypeCode.Int64:
+                        x.PutLong(key, (long)value);
+                        break;
+
+                    case TypeCode.Single:
+                        x.PutFloat(key, (float)value);
+                        break;
+
+                    case TypeCode.String:
+                        x.PutString(key, (string)value);
+                        break;
+
+                    default:
+                        var @string = this.Serialize(type, value);
+                        x.PutString(key, @string);
+                        break;
+                }
+            });
         }
 
 
         protected override void NativeRemove(string key) {
-            this.UoW(x => x.Remove(key));
-        }
-
-
-        protected override void NativeSet(string key, string value) {
-            this.UoW(x => x.PutString(key, value));
+            this.UoW((prefs, x) => x.Remove(key));
         }
 
 

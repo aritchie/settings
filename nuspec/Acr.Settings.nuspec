@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>4.0.2</version>
+        <version>4.1.0</version>
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
@@ -21,8 +21,11 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
             <dependency id="Newtonsoft.Json" version="[6.0.8, 7)" />
         </dependencies>
         <releaseNotes>
-4.0.2
-New iOS iCloud settings implementation
+4.1.0
+Using native types internally on Android and iOS to allow use of PreferenceActivity and Settings Bundles
+New iOS iCloud settings implementation.  In AppDelegate, set Settings.Roaming = new Acr,Settings.iCloudSettingsImpl();
+New KeysNotToClear list to prevent Clear from removing a value.  Remove will still remove a key if specifically requested.
+Fix SetDefaults behaviour
 
 4.0.1
 Fixes to android profile
