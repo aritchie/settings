@@ -23,17 +23,21 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
 Used for things like iOS app groups and android wear.  It works the same way as Local (substitute with Roaming), but requires initialization.
 The namespace setting only applies to iOS and Android.
 
-Android
-    Launch Activity - Settings.InitRoaming("your app namespace");
+*Android*
 
-iOS
-    AppDelegate - Settings.InitRoaming("your app namespace");
+        Launch Activity - Settings.InitRoaming("your app namespace");
 
-Windows
-    Settings.InitRoaming();
+*iOS*
 
-iOS iCloud
-    AppDelegate - Settings.Roaming = new Acr.Settings.iCloudSettingsImpl();
+        AppDelegate - Settings.InitRoaming("your app namespace");
+
+*Windows*
+
+        Settings.InitRoaming();
+
+*iOS iCloud*
+
+        AppDelegate - Settings.Roaming = new Acr.Settings.iCloudSettingsImpl();
 
 ##To supply your own implementation:
 
@@ -49,8 +53,15 @@ iOS iCloud
     };
 
 ###Dependency Injection:
-ie. autofac
-    containerBuilder.Register(x => Settings.Local).As<ISettings>().SingleInstance();
+
+*Autofac*
+
+        containerBuilder.Register(x => Settings.Local).As<ISettings>().SingleInstance();
+
+*MvvmCross (manual - can use bootstrap below)*
+
+        Mvx.RegisterSingleton(Settings.Instance);
+
 
 ####For MvvmCross:
 There is a platform shim for MvvmCross (Acr.MvvmCross.Plugins.Settings).  Roaming is not currently supported in the shim.
