@@ -49,6 +49,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Acr.Settings.Interface\Acr.Settings.Interface.csproj">
+      <Project>{ebdadceb-d1b4-4fe4-9873-04cd80edad45}</Project>
+      <Name>Acr.Settings.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Acr.Settings.Shared\Acr.Settings.Shared.projitems" Label="Shared" Condition="Exists('..\Acr.Settings.Shared\Acr.Settings.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

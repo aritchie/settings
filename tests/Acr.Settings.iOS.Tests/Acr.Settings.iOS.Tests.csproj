@@ -111,6 +111,10 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Acr.Settings.Interface\Acr.Settings.Interface.csproj">
+      <Project>{ebdadceb-d1b4-4fe4-9873-04cd80edad45}</Project>
+      <Name>Acr.Settings.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Acr.Settings.iOS\Acr.Settings.iOS.csproj">
       <Project>{2E4D0D6A-CE0C-447D-AC16-2143B62A6B25}</Project>
       <Name>Acr.Settings.iOS</Name>

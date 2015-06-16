@@ -23,6 +23,10 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
             <dependency id="Newtonsoft.Json" version="[6.0.8, 7)" />
         </dependencies>
         <releaseNotes>
+4.2.0
+Interface library for better abstraction point
+Fix nuspec for WP8, WPA81, and windows
+
 4.1.0
 Using native types internally on Android and iOS to allow use of PreferenceActivity and Settings Bundles
 New iOS iCloud settings implementation.  In AppDelegate, set Settings.Roaming = new Acr,Settings.iCloudSettingsImpl();
@@ -69,15 +73,27 @@ Initial Release
     </metadata>
     <files>
         <!-- PCL -->
-        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.dll" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.Settings.dll" />
+        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.dll" target="lib\portable-net45+netcore45+win8+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.Settings.dll" />
+        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.Interface.dll" target="lib\portable-net45+win8+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.Settings.Interface.dll" />
 
         <!-- android -->
         <file src="..\src\Acr.Settings.Android\bin\Release\Acr.Settings.dll" target="lib\MonoAndroid10\Acr.Settings.dll" />
+        <file src="..\src\Acr.Settings.Android\bin\Release\Acr.Settings.Interface.dll" target="lib\MonoAndroid10\Acr.Settings.Interface.dll" />
 
         <!-- ios -->
         <file src="..\src\Acr.Settings.iOS\bin\iPhone\Release\Acr.Settings.dll" target="lib\Xamarin.iOS10\Acr.Settings.dll" />
+        <file src="..\src\Acr.Settings.iOS\bin\iPhone\Release\Acr.Settings.Interface.dll" target="lib\Xamarin.iOS10\Acr.Settings.Interface.dll" />
 
-        <!-- win universal -->
-        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.dll" target="lib\portable-win81+wpa81\Acr.Settings.dll" />
+        <!-- wp8 -->
+        <file src="..\src\Acr.Settings.WindowsPhone\bin\Release\Acr.Settings.dll" target="lib\wp8\Acr.Settings.dll" />
+        <file src="..\src\Acr.Settings.WindowsPhone\bin\Release\Acr.Settings.Interface.dll" target="lib\wp8\Acr.Settings.Interface.dll" />
+
+        <!-- wp81 -->
+        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.dll" target="lib\wpa81\Acr.Settings.dll" />
+        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.Interface.dll" target="lib\wpa81\Acr.Settings.Interface.dll" />
+
+        <!-- windows -->
+        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.dll" target="lib\win8\Acr.Settings.dll" />
+        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.Interface.dll" target="lib\win8\Acr.Settings.Interface.dll" />
     </files>
 </package>

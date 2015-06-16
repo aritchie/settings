@@ -10,9 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSettings.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ISettings.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SettingChangeAction.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SettingChangeEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
   </ItemGroup>

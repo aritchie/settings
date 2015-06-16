@@ -68,6 +68,10 @@
       <Project>{B1019C4B-E37A-4B75-9AFC-980820320B6B}</Project>
       <Name>Acr.Settings.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\Acr.Settings.Interface\Acr.Settings.Interface.csproj">
+      <Project>{ebdadceb-d1b4-4fe4-9873-04cd80edad45}</Project>
+      <Name>Acr.Settings.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\Acr.Settings.Tests\Acr.Settings.Tests.projitems" Label="Shared" Condition="Exists('..\Acr.Settings.Tests\Acr.Settings.Tests.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
