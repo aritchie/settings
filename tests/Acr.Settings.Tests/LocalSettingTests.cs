@@ -1,3 +1,4 @@
+#if !NETCORE
 using System;
 using NUnit.Framework;
 
@@ -19,3 +20,4 @@ namespace Acr.Settings.Tests {
         }
     }
 }
+#endif

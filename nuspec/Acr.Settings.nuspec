@@ -26,6 +26,7 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
 4.2.0
 Interface library for better abstraction point
 Fix nuspec for WP8, WPA81, and windows
+Net45 implementation for registry and appsettings
 
 4.1.0
 Using native types internally on Android and iOS to allow use of PreferenceActivity and Settings Bundles
@@ -95,5 +96,9 @@ Initial Release
         <!-- windows -->
         <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.dll" target="lib\win8\Acr.Settings.dll" />
         <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.Interface.dll" target="lib\win8\Acr.Settings.Interface.dll" />
+
+        <!--net45-->
+        <file src="..\src\Acr.Settings.NetCore\bin\Release\Acr.Settings.dll" target="lib\net45\Acr.Settings.dll" />
+        <file src="..\src\Acr.Settings.NetCore\bin\Release\Acr.Settings.Interface.dll" target="lib\net45\Acr.Settings.Interface.dll" />
     </files>
 </package>
