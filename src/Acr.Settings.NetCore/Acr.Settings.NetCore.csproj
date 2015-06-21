@@ -7,8 +7,8 @@
     <ProjectGuid>{1DF7E24F-CD43-4394-AA3C-BA0F755EF92F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Acr.Settings.NetCore</RootNamespace>
-    <AssemblyName>Acr.Settings.NetCore</AssemblyName>
+    <RootNamespace>Acr.Settings</RootNamespace>
+    <AssemblyName>Acr.Settings</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
