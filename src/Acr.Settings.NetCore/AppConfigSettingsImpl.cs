@@ -33,16 +33,23 @@ namespace Acr.Settings.NetCore {
 
 
         protected override void NativeClear() {
-            this.config.AppSettings.Settings.Clear();
+            var values = this.NativeValues();
+            foreach (var item in values)
+                if (this.ShouldClear(item.Key))
+                    this.config.AppSettings.Settings.Remove(item.Key);
+
             this.Flush();
         }
 
 
         protected override object NativeGet(Type type, string key) {
             var el = this.config.AppSettings.Settings[key];
-            return el == null
+            var value = el == null
                 ? null
                 : el.Value;
+
+            var result = this.Deserialize(type, value);
+            return result;
         }
 
 

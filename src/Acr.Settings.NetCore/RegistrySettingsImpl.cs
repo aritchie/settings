@@ -29,12 +29,19 @@ namespace Acr.Settings.NetCore {
 
 
         protected override void NativeClear() {
+            var values = this.NativeValues();
+            foreach (var item in values)
+                if (this.ShouldClear(item.Key))
+                    this.registry.DeleteValue(item.Key, false);
+
             this.registry.Flush();
         }
 
 
         protected override object NativeGet(Type type, string key) {
-            return this.registry.GetValue(key);
+            var value = (string)this.registry.GetValue(key);
+            var result = this.Deserialize(type, value);
+            return result;
         }
 
 
