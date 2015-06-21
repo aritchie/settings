@@ -8,7 +8,7 @@ namespace Acr.MvvmCross.Plugins.Settings.Touch {
     public class Plugin : IMvxPlugin {
 
         public void Load() {
-            Mvx.RegisterSingleton(Acr.Settings.Settings.Instance);
+            Mvx.RegisterSingleton(Acr.Settings.Settings.Local);
         }
     }
 }
