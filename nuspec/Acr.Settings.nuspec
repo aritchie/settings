@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>4.2.0</version>
+        <version>4.2.1</version>
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
@@ -23,6 +23,9 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
             <dependency id="Newtonsoft.Json" version="[6.0.8, 7)" />
         </dependencies>
         <releaseNotes>
+4.2.1
+Nuspec fix
+
 4.2.0
 Interface library for better abstraction point
 Fix nuspec for WP8, WPA81, and windows
@@ -75,7 +78,7 @@ Initial Release
     <files>
         <!-- PCL -->
         <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.dll" target="lib\portable-net45+netcore45+win8+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.Settings.dll" />
-        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.Interface.dll" target="lib\portable-net45+win8+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.Settings.Interface.dll" />
+        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.Interface.dll" target="lib\portable-net45+netcore45+win8+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.Settings.Interface.dll" />
 
         <!-- android -->
         <file src="..\src\Acr.Settings.Android\bin\Release\Acr.Settings.dll" target="lib\MonoAndroid10\Acr.Settings.dll" />
