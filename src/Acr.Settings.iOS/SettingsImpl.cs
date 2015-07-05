@@ -24,9 +24,14 @@ namespace Acr.Settings {
                 "NSInterfaceStyle"
             };
 
-            this.prefs = nameSpace == null
-                ? NSUserDefaults.StandardUserDefaults
-                : new NSUserDefaults(nameSpace, NSUserDefaultsType.SuiteName);
+            if (nameSpace == null) {
+                this.prefs = NSUserDefaults.StandardUserDefaults;
+                this.IsRoamingProfile = false;
+            }
+            else {
+                this.prefs = new NSUserDefaults(nameSpace, NSUserDefaultsType.SuiteName);
+                this.IsRoamingProfile = true;
+            }
         }
 
 
@@ -56,9 +61,11 @@ namespace Acr.Settings {
                     return this.prefs.DoubleForKey(key);
 
                 case TypeCode.Int32:
-                    return this.prefs.IntForKey(key);
+                    // returns nint now, type case to int
+                    return (int)this.prefs.IntForKey(key);
 
                 case TypeCode.Single:
+#warning Still returns float, not nfloat.  Xamarin likely to break since above was recently changed
                     return this.prefs.FloatForKey(key);
 
                 case TypeCode.String:
