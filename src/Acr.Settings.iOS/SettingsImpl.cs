@@ -65,8 +65,7 @@ namespace Acr.Settings {
                     return (int)this.prefs.IntForKey(key);
 
                 case TypeCode.Single:
-#warning Still returns float, not nfloat.  Xamarin likely to break since above was recently changed
-                    return this.prefs.FloatForKey(key);
+                    return (float)this.prefs.FloatForKey(key);
 
                 case TypeCode.String:
                     return this.prefs.StringForKey(key);
