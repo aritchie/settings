@@ -61,7 +61,6 @@ namespace Acr.Settings {
                     return this.prefs.DoubleForKey(key);
 
                 case TypeCode.Int32:
-                    // returns nint now, type case to int
                     return (int)this.prefs.IntForKey(key);
 
                 case TypeCode.Single:
@@ -71,8 +70,6 @@ namespace Acr.Settings {
                     return this.prefs.StringForKey(key);
 
                 default:
-                    //this.prefs.StringArrayForKey("")
-                    //this.prefs.ArrayForKey(key)
                     var @string = this.prefs.StringForKey(key);
                     return this.Deserialize(type, @string);
             }

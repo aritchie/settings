@@ -23,6 +23,10 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
             <dependency id="Newtonsoft.Json" version="[7.0.1, 8.0)" />
         </dependencies>
         <releaseNotes>
+4.2.4
+Minor fix related to previous type cast issue
+Add in-memory settings for unit testing
+
 4.2.3
 [ios][fix] - type cast exception with nsuserdefaults nint to int
 

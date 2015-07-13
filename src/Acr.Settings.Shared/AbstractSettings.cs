@@ -74,9 +74,7 @@ namespace Acr.Settings {
 
 
 		protected virtual void OnChanged(SettingChangeEventArgs args) {
-			if (this.Changed != null)
-				this.Changed(this, args);
-
+			this.Changed?.Invoke(this, args);
             var native = this.NativeValues();
             this.List = new ReadOnlyDictionary<string, string>(native);
 		}
