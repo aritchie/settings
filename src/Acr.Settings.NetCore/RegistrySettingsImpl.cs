@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.Win32;
 
 
-namespace Acr.Settings.NetCore {
+namespace Acr.Settings {
 
     public class RegistrySettingsImpl : AbstractSettings {
         private readonly RegistryKey registry;

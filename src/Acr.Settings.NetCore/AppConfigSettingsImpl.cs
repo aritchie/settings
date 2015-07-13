@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 
 
-namespace Acr.Settings.NetCore {
+namespace Acr.Settings {
 
     public class AppConfigSettingsImpl : AbstractSettings {
         private readonly Configuration config;
