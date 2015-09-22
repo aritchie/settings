@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>4.3.0</version>
+        <version>4.3.1</version>
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
@@ -23,6 +23,11 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
             <dependency id="Newtonsoft.Json" version="[7.0.1, 8.0)" />
         </dependencies>
         <releaseNotes>
+4.2.1
+[fix] UAP registration
+[fix] appsettings optional ctor arg
+[fix] appsettings as default netcore implementation
+
 4.3.0
 Added UAP implementation
 Cleanup Shared and Interface library.  Abstract implementation and inmemory implementations now found in interface library.
@@ -121,6 +126,6 @@ Initial Release
         <!--uap-->
         <file src="..\src\Acr.Settings.Uap\bin\Release\Acr.Settings.dll" target="lib\uap10.0\Acr.Settings.dll" />
         <file src="..\src\Acr.Settings.Uap\bin\Release\Acr.Settings.Interface.dll" target="lib\uap10.0\Acr.Settings.Interface.dll" />
-        <file src="..\src\Acr.Settings.Uap\Properties\Acr.Settings.Uap.rd.xml" target="lib\uap10.0\Acr.Settings.Uap.rd.xml" />
+        <file src="..\src\Acr.Settings.Uap\Properties\Acr.Settings.rd.xml" target="lib\uap10.0\Acr.Settings.rd.xml" />
     </files>
 </package>

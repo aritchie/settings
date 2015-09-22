@@ -10,7 +10,7 @@ namespace Acr.Settings {
         private readonly Configuration config;
 
 
-        public AppConfigSettingsImpl(string fileName) {
+        public AppConfigSettingsImpl(string fileName = null) {
             this.ConfigurationFileName = fileName;
 
             if (this.ConfigurationFileName == null)
@@ -44,11 +44,7 @@ namespace Acr.Settings {
 
         protected override object NativeGet(Type type, string key) {
             var el = this.config.AppSettings.Settings[key];
-            var value = el == null
-                ? null
-                : el.Value;
-
-            var result = this.Deserialize(type, value);
+            var result = this.Deserialize(type, el?.Value);
             return result;
         }
 
