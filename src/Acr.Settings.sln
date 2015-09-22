@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\nuspec\Acr.MvvmCross.Plugins.Settings.nuspec = ..\nuspec\Acr.MvvmCross.Plugins.Settings.nuspec
 		..\nuspec\Acr.Settings.nuspec = ..\nuspec\Acr.Settings.nuspec
+		..\nuspec\nuget.exe = ..\nuspec\nuget.exe
 		..\nuspec\pack.cmd = ..\nuspec\pack.cmd
 		..\nuspec\push.cmd = ..\nuspec\push.cmd
 		..\readme.md = ..\readme.md
