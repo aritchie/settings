@@ -7,7 +7,7 @@ using Foundation;
 namespace Acr.Settings {
 
     public class SettingsImpl : AbstractSettings {
-        private readonly NSUserDefaults prefs;
+        readonly NSUserDefaults prefs;
 
 
         public SettingsImpl(string nameSpace) {

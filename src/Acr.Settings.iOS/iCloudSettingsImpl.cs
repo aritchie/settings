@@ -8,9 +8,7 @@ namespace Acr.Settings {
 
     public class iCloudSettingsImpl : AbstractSettings {
 
-        protected NSUbiquitousKeyValueStore Store {
-            get { return NSUbiquitousKeyValueStore.DefaultStore; }
-        }
+        protected NSUbiquitousKeyValueStore Store => NSUbiquitousKeyValueStore.DefaultStore;
 
 
         public override bool Contains(string key) {

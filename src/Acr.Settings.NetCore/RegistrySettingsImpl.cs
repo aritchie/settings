@@ -7,7 +7,7 @@ using Microsoft.Win32;
 namespace Acr.Settings {
 
     public class RegistrySettingsImpl : AbstractSettings {
-        private readonly RegistryKey registry;
+        readonly RegistryKey registry;
         public bool IsCurrentUser { get; private set; }
         public string RegistryKeyName { get; private set; }
 

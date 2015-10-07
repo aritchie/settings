@@ -4,19 +4,19 @@
 namespace Acr.Settings {
 
     public static class Settings {
-        private static readonly Lazy<ISettings> localInit = new Lazy<ISettings>(() => CreateInstance(null), false);
+        static readonly Lazy<ISettings> localInit = new Lazy<ISettings>(() => CreateInstance(), false);
 
 #if __ANDROID__ || __IOS__
         public static void InitRoaming(string nameSpace) {
             Roaming = CreateInstance(nameSpace);
         }
-#elif __WINDOWS__
+#elif __WINDOWS__ || WINDOWS_PHONE
         public static void InitRoaming() {
             Roaming = CreateInstance("Windows");
         }
 #endif
 
-        private static ISettings roaming;
+        static ISettings roaming;
         public static ISettings Roaming {
             get {
                 if (roaming == null)
@@ -29,7 +29,7 @@ namespace Acr.Settings {
 
 
 
-        private static ISettings local;
+        static ISettings local;
         public static ISettings Local {
             get { return local ?? localInit.Value; }
             set { local = value; }
@@ -42,7 +42,7 @@ namespace Acr.Settings {
             return new SettingsImpl(nameSpace);
 #elif NET_CORE
             return new AppConfigSettingsImpl();
-#elif __WINDOWS__
+#elif __WINDOWS__ || WINDOWS_PHONE
             return new SettingsImpl(nameSpace != null);
 #else
             throw new ArgumentException("Platform plugin not found.  Did you reference the nuget package in your platform project?");

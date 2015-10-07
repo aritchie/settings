@@ -7,7 +7,7 @@ using Windows.Storage;
 namespace Acr.Settings {
 
     public class SettingsImpl : AbstractSettings {
-        private readonly ApplicationDataContainer container;
+        readonly ApplicationDataContainer container;
 
 
         public SettingsImpl(bool isRoaming = false) {

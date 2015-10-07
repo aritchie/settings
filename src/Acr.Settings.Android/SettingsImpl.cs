@@ -9,7 +9,8 @@ using Android.Preferences;
 namespace Acr.Settings {
 
     public class SettingsImpl : AbstractSettings {
-        private readonly string nameSpace;
+        readonly string nameSpace;
+
 
         public SettingsImpl(string nameSpace) {
             this.nameSpace = nameSpace;

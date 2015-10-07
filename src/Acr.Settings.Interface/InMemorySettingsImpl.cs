@@ -9,7 +9,7 @@ namespace Acr.Settings {
     /// This is a simple (non-thread safe) dictionary useful for unit testing.  NOT INTENDED FOR PRODUCTION!
     /// </summary>
     public class InMemorySettingsImpl : AbstractSettings {
-        private readonly IDictionary<string, object> settings = new Dictionary<string, object>();
+        readonly IDictionary<string, object> settings = new Dictionary<string, object>();
 
 
         protected override IDictionary<string, string> NativeValues() {

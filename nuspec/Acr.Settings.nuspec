@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>4.3.1</version>
+        <version>4.3.2</version>
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
@@ -23,7 +23,10 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
             <dependency id="Newtonsoft.Json" version="[7.0.1, 8.0)" />
         </dependencies>
         <releaseNotes>
-4.2.1
+4.3.2
+[fix] WP8 registration
+
+4.3.1
 [fix] UAP registration
 [fix] appsettings optional ctor arg
 [fix] appsettings as default netcore implementation
