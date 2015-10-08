@@ -39,13 +39,34 @@ namespace Acr.Settings {
 
 
         protected override object NativeGet(Type type, string key) {
-            return this.isolatedStore[key];
+
+            var value = this.isolatedStore[key];
+
+            if (type == typeof(string) || this.IsStringifyType(type))
+                return value;
+
+
+
+            if (typeof(string) == value.GetType()) {
+                return this.Deserialize(type, (string)value);
+            } else {
+                throw new ArgumentException("Unexpected object type");
+            }
         }
 
 
         protected override void NativeSet(Type type, string key, object value) {
-            //this.isolatedStore[key] = value;
-            AddOrUpdateValue(key, value);
+
+            object setValue;
+
+            if (type == typeof(string) || this.IsStringifyType(type)) {
+                setValue = value;
+            } else {
+                setValue = this.Serialize(type, value);
+            }
+            
+
+            AddOrUpdateValue(key, setValue);
         }
 
 
@@ -72,6 +93,9 @@ namespace Acr.Settings {
                 // If the new value is different, set the new value.
                 if (this.isolatedStore[key] != value) {
                     this.isolatedStore[key] = value;
+                    valueChanged = true;
+                }
+                if (value is System.Collections.IEnumerable) {
                     valueChanged = true;
                 }
             } catch (KeyNotFoundException) {
