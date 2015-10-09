@@ -233,3 +233,4 @@ $RECYCLE.BIN/
 src/Acr.Settings.userprefs
 /src/Acr.Settings.Uap/project.lock.json
 /src/Acr.Settings.Uap.Tests/project.lock.json
+/src/.vs/config/applicationhost.config

@@ -32,6 +32,14 @@ namespace Acr.Settings {
         }
 
 
+        public virtual T GetRequired<T>(string key) {
+            if (!this.Contains(key))
+                throw new ArgumentException($"Settings key '{key}' is not set");
+
+            return this.Get<T>(key);
+        }
+
+
         public virtual void Set<T>(string key, T value) {
             var action = this.Contains(key)
                 ? SettingChangeAction.Update

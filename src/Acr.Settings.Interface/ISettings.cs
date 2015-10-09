@@ -33,6 +33,14 @@ namespace Acr.Settings {
         T Get<T>(string key, T defaultValue = default(T));
 
         /// <summary>
+        /// Enforces that the key is set and returns value
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        T GetRequired<T>(string key);
+
+        /// <summary>
         /// Send any value/object to the settings store
         /// </summary>
         /// <typeparam name="T"></typeparam>
