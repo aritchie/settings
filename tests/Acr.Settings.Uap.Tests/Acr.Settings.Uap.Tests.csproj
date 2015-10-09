@@ -124,11 +124,11 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Acr.Settings.Interface\Acr.Settings.Interface.csproj">
+    <ProjectReference Include="..\..\src\Acr.Settings.Interface\Acr.Settings.Interface.csproj">
       <Project>{ebdadceb-d1b4-4fe4-9873-04cd80edad45}</Project>
       <Name>Acr.Settings.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Acr.Settings.Uap\Acr.Settings.Uap.csproj">
+    <ProjectReference Include="..\..\src\Acr.Settings.Uap\Acr.Settings.Uap.csproj">
       <Project>{493754b8-c77c-41a3-97aa-6bb895e408fe}</Project>
       <Name>Acr.Settings.Uap</Name>
     </ProjectReference>
