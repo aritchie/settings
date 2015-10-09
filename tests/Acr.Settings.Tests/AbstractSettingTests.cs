@@ -11,16 +11,23 @@ namespace Acr.Settings.Tests {
 
         protected abstract ISettings Create();
 
+#if MSTESTS
 
-		[SetUp]
-		public void OnSetup() {
+#else
+        [SetUp]
+#endif
+        public void OnSetup() {
 			this.Settings = this.Create();
 			this.Settings.Clear();
 		}
 
 
-		[Test]
-		public async void OnSettingChanged() {
+#if MSTESTS
+        [TestMethod]
+#else
+        [Test]
+#endif
+        public async void OnSettingChanged() {
             var tcs = new TaskCompletionSource<SettingChangeEventArgs>();
 			this.Settings.Changed += (sender, args) => tcs.TrySetResult(args);
 
@@ -33,7 +40,11 @@ namespace Acr.Settings.Tests {
 		}
 
 
-		[Test]
+#if MSTESTS
+        [TestMethod]
+#else
+        [Test]
+#endif
 		public void Object() {
 			var inv = new Tuple<int, string>(1, "2");
 			this.Settings.Set("Object", inv);
@@ -44,7 +55,11 @@ namespace Acr.Settings.Tests {
 		}
 
 
+#if MSTESTS
+        [TestMethod]
+#else
         [Test]
+#endif
         public void IntTest() {
             this.Settings.Set("Test", 99);
             var value = this.Settings.Get<int>("Test");
@@ -65,7 +80,11 @@ namespace Acr.Settings.Tests {
         }
 
 
+#if MSTESTS
+        [TestMethod]
+#else
         [Test]
+#endif
         public void DateTimeNullTest() {
             var dt = new DateTime(1999, 12, 31, 23, 59, 0);
             var nvalue = this.Settings.Get<DateTime?>("DateTimeNullTest");
@@ -77,7 +96,11 @@ namespace Acr.Settings.Tests {
         }
 
 
-		[Test]
+#if MSTESTS
+        [TestMethod]
+#else
+        [Test]
+#endif
 		public void SetOverride() {
 			this.Settings.Set("Test", "1");
 			this.Settings.Set("Test", "2");
@@ -86,7 +109,11 @@ namespace Acr.Settings.Tests {
 		}
 
 
+#if MSTESTS
+        [TestMethod]
+#else
         [Test]
+#endif
         public void ContainsTest() {
             var flag = this.Settings.Contains(Guid.NewGuid().ToString());
             Assert.False(flag, "Contains should have returned false");
@@ -97,7 +124,11 @@ namespace Acr.Settings.Tests {
         }
 
 
+#if MSTESTS
+        [TestMethod]
+#else
         [Test]
+#endif
         public void RemoveTest() {
             this.Settings.Set("Test", "1");
             var flag = this.Settings.Remove("Test");
@@ -105,7 +136,11 @@ namespace Acr.Settings.Tests {
         }
 
 
+#if MSTESTS
+        [TestMethod]
+#else
         [Test]
+#endif
         public void LongTest() {
             long value = 1;
             this.Settings.Set("LongTest", value);
@@ -114,7 +149,11 @@ namespace Acr.Settings.Tests {
         }
 
 
-		[Test]
+#if MSTESTS
+        [TestMethod]
+#else
+        [Test]
+#endif
 		public void GuidTest() {
 			var guid = this.Settings.Get<Guid>("GuidTest");
 			Assert.AreEqual(Guid.Empty, guid);
@@ -126,7 +165,11 @@ namespace Acr.Settings.Tests {
 		}
 
 
+#if MSTESTS
+        [TestMethod]
+#else
         [Test]
+#endif
         public void SetNullRemoves() {
             this.Settings.Set("SetNullRemoves", "Blah");
             this.Settings.Set<string>("SetNullRemoves", null);
@@ -135,7 +178,11 @@ namespace Acr.Settings.Tests {
         }
 
 
+#if MSTESTS
+        [TestMethod]
+#else
         [Test]
+#endif
         public void SetDefaultTRemoves() {
             long value = 1;
             this.Settings.Set("SetDefaultTRemoves", value);
@@ -145,7 +192,11 @@ namespace Acr.Settings.Tests {
         }
 
 
-		[Test]
+#if MSTESTS
+        [TestMethod]
+#else
+        [Test]
+#endif
 		public void GetDefaultParameter() {
 			var tmp = Guid.NewGuid().ToString();
 			var r = this.Settings.Get("GetDefaultParameter", tmp);
@@ -153,7 +204,11 @@ namespace Acr.Settings.Tests {
 		}
 
 
+#if MSTESTS
+        [TestMethod]
+#else
         [Test]
+#endif
         public void TryDefaults() {
             var flag = this.Settings.SetDefault("TryDefaults", "Initial Value");
             Assert.True(flag, "Default value could not be set");
@@ -166,7 +221,11 @@ namespace Acr.Settings.Tests {
         }
 
 
+#if MSTESTS
+        [TestMethod]
+#else
         [Test]
+#endif
         public void ClearPreserveList() {
             this.Settings.Set("ClearPreserveTest", "Value");
             this.Settings.KeysNotToClear.Add("ClearPreserveTest");

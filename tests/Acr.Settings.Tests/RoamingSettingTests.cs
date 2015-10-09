@@ -1,4 +1,4 @@
-﻿#if !NETCORE
+﻿#if !NETCORE && !MSTEST
 using System;
 using NUnit.Framework;
 
