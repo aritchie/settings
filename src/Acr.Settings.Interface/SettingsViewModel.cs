@@ -5,12 +5,12 @@ using System.Runtime.CompilerServices;
 
 namespace Acr.Settings {
 
-    public class SettingsViewModel : INotifyPropertyChanged {
+    public abstract class SettingsViewModel : INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
         readonly ISettings settings;
 
 
-        public SettingsViewModel(ISettings settings) {
+        protected SettingsViewModel(ISettings settings) {
             this.settings = settings;
             this.settings.Changed += (sender, args) => this.OnPropertyChanged(args.Key);
         }

@@ -23,12 +23,17 @@ namespace Acr.Settings {
 
 
         public virtual T Get<T>(string key, T defaultValue = default(T)) {
-            if (!this.Contains(key))
-                return defaultValue;
+            try {
+                if (!this.Contains(key))
+                    return defaultValue;
 
-            var type = this.UnwrapType(typeof(T));
-            var value = this.NativeGet(type, key);
-            return (T)value;
+                var type = this.UnwrapType(typeof(T));
+                var value = this.NativeGet(type, key);
+                return (T)value;
+            }
+            catch (Exception ex) {
+                throw new ArgumentException($"Error getting key: {key}", ex);
+            }
         }
 
 
@@ -41,17 +46,22 @@ namespace Acr.Settings {
 
 
         public virtual void Set<T>(string key, T value) {
-            var action = this.Contains(key)
-                ? SettingChangeAction.Update
-                : SettingChangeAction.Add;
+            try {
+                var action = this.Contains(key)
+                    ? SettingChangeAction.Update
+                    : SettingChangeAction.Add;
 
-            if (EqualityComparer<T>.Default.Equals(value, default(T)))
-                this.Remove(key);
+                if (EqualityComparer<T>.Default.Equals(value, default(T)))
+                    this.Remove(key);
 
-            else {
-                var type = this.UnwrapType(typeof(T));
-                this.NativeSet(type, key, value);
-                this.OnChanged(new SettingChangeEventArgs(action, key, value));
+                else {
+                    var type = this.UnwrapType(typeof(T));
+                    this.NativeSet(type, key, value);
+                    this.OnChanged(new SettingChangeEventArgs(action, key, value));
+                }
+            }
+            catch (Exception ex) {
+                throw new ArgumentException($"Error setting key {key} with value {value}", ex);
             }
         }
 
