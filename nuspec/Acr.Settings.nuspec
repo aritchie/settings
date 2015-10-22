@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>4.3.4</version>
+        <version>4.3.5</version>
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
@@ -18,11 +18,14 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
         <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
         <projectUrl>https://github.com/aritchie/settings</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <tags>windows winphone xamarin xam.pcl settings</tags>
+        <tags>windows uwp winphone android ios xamarin xam.pcl settings</tags>
         <dependencies>
             <dependency id="Newtonsoft.Json" version="[7.0.1, 8.0)" />
         </dependencies>
         <releaseNotes>
+4.3.5
+[fix] winphone silverlight client on wp8.  special thanks to @petero-dk
+
 4.3.4
 [feature] base settings viewmodel
 [enhancement] better error messages for failed get/set calls
@@ -121,7 +124,7 @@ Initial Release
         <file src="..\src\Acr.Settings.WindowsPhone\bin\Release\Acr.Settings.dll" target="lib\wp8\Acr.Settings.dll" />
         <file src="..\src\Acr.Settings.WindowsPhone\bin\Release\Acr.Settings.Interface.dll" target="lib\wp8\Acr.Settings.Interface.dll" />
 
-        <!-- wp81 -->
+        <!-- wpa81 -->
         <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.dll" target="lib\wpa81\Acr.Settings.dll" />
         <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.Interface.dll" target="lib\wpa81\Acr.Settings.Interface.dll" />
 
