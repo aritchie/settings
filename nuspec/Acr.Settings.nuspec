@@ -25,6 +25,7 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
         <releaseNotes>
 4.3.5
 [fix] winphone silverlight client on wp8.  special thanks to @petero-dk
+[fix] serialization issues across all window platforms
 
 4.3.4
 [feature] base settings viewmodel

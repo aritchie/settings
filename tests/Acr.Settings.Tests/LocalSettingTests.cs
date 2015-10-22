@@ -1,7 +1,10 @@
 #if !NETCORE
 using System;
+#if MSTESTS
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+#else
 using NUnit.Framework;
-
+#endif
 
 namespace Acr.Settings.Tests {
 
@@ -13,7 +16,11 @@ namespace Acr.Settings.Tests {
     public class LocalSettingTests : AbstractSettingTests {
 
         protected override ISettings Create() {
+#if WINDOWS_UWP
+            return new SettingsImpl(false);
+#else
             return new SettingsImpl(null);
+#endif
         }
 
 
@@ -23,7 +30,7 @@ namespace Acr.Settings.Tests {
         [Test]
 #endif
         public void GlobalInstanceTest() {
-            Assert.NotNull(Acr.Settings.Settings.Local);
+            Assert.IsNotNull(Acr.Settings.Settings.Local);
             Assert.IsFalse(Acr.Settings.Settings.Local.IsRoamingProfile, "Romaing profile detected");
         }
     }

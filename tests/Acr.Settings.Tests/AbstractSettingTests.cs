@@ -1,6 +1,10 @@
 using System;
 using System.Threading.Tasks;
+#if MSTESTS
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+#else
 using NUnit.Framework;
+#endif
 
 
 namespace Acr.Settings.Tests {
@@ -12,7 +16,7 @@ namespace Acr.Settings.Tests {
         protected abstract ISettings Create();
 
 #if MSTESTS
-
+        [TestInitialize]
 #else
         [SetUp]
 #endif
@@ -67,7 +71,11 @@ namespace Acr.Settings.Tests {
         }
 
 
+#if MSTESTS
+        [TestMethod]
+#else
         [Test]
+#endif
         public void IntNullTest() {
             var nvalue = this.Settings.Get<int?>("Blah");
             Assert.IsNull(nvalue, "Int? should be null");
@@ -116,11 +124,11 @@ namespace Acr.Settings.Tests {
 #endif
         public void ContainsTest() {
             var flag = this.Settings.Contains(Guid.NewGuid().ToString());
-            Assert.False(flag, "Contains should have returned false");
+            Assert.IsFalse(flag, "Contains should have returned false");
 
             this.Settings.Set("Test", "1");
             flag = this.Settings.Contains("Test");
-            Assert.True(flag, "Contains should have returned true");
+            Assert.IsTrue(flag, "Contains should have returned true");
         }
 
 
@@ -132,7 +140,7 @@ namespace Acr.Settings.Tests {
         public void RemoveTest() {
             this.Settings.Set("Test", "1");
             var flag = this.Settings.Remove("Test");
-            Assert.True(flag, "Remove should have returned success");
+            Assert.IsTrue(flag, "Remove should have returned success");
         }
 
 
@@ -174,7 +182,7 @@ namespace Acr.Settings.Tests {
             this.Settings.Set("SetNullRemoves", "Blah");
             this.Settings.Set<string>("SetNullRemoves", null);
             var contains = this.Settings.Contains("SetNullRemoves");
-            Assert.False(contains);
+            Assert.IsFalse(contains);
         }
 
 
@@ -188,7 +196,7 @@ namespace Acr.Settings.Tests {
             this.Settings.Set("SetDefaultTRemoves", value);
             this.Settings.Set<long>("SetDefaultTRemoves", default(long));
             var contains = this.Settings.Contains("SetDefaultTRemoves");
-            Assert.False(contains);
+            Assert.IsFalse(contains);
         }
 
 
@@ -211,10 +219,10 @@ namespace Acr.Settings.Tests {
 #endif
         public void TryDefaults() {
             var flag = this.Settings.SetDefault("TryDefaults", "Initial Value");
-            Assert.True(flag, "Default value could not be set");
+            Assert.IsTrue(flag, "Default value could not be set");
 
             flag = this.Settings.SetDefault("TryDefaults", "Second Value");
-            Assert.False(flag, "Default value was set and should not have been");
+            Assert.IsFalse(flag, "Default value was set and should not have been");
 
             var currentValue = this.Settings.Get<string>("TryDefaults");
             Assert.AreEqual("Initial Value", currentValue);

@@ -36,12 +36,15 @@ namespace Acr.Settings {
 
 
         protected override object NativeGet(Type type, string key) {
-            return this.container.Values[key];
+            var @string = (string)this.container.Values[key];
+            var @object = this.Deserialize(type, @string);
+            return @object;
         }
 
 
         protected override void NativeSet(Type type, string key, object value) {
-            this.container.Values[key] = value;
+            var @string = this.Serialize(type, value);
+            this.container.Values[key] = @string;
         }
 
 
