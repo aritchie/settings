@@ -20,7 +20,7 @@ namespace Acr.Settings.Tests {
 #else
         [SetUp]
 #endif
-        public void OnSetup() {
+        public virtual void OnSetup() {
 			this.Settings = this.Create();
 			this.Settings.Clear();
 		}
@@ -31,7 +31,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public async Task OnSettingChanged() {
+        public async virtual Task OnSettingChanged() {
             var tcs = new TaskCompletionSource<SettingChangeEventArgs>();
 			this.Settings.Changed += (sender, args) => tcs.TrySetResult(args);
 
@@ -49,7 +49,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-		public void Object() {
+		public virtual void Object() {
 			var inv = new Tuple<int, string>(1, "2");
 			this.Settings.Set("Object", inv);
 
@@ -64,7 +64,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public void IntTest() {
+        public virtual void IntTest() {
             this.Settings.Set("Test", 99);
             var value = this.Settings.Get<int>("Test");
             Assert.AreEqual(99, value);
@@ -76,7 +76,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public void IntNullTest() {
+        public virtual void IntNullTest() {
             var nvalue = this.Settings.Get<int?>("Blah");
             Assert.IsNull(nvalue, "Int? should be null");
 
@@ -93,7 +93,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public void DateTimeNullTest() {
+        public virtual void DateTimeNullTest() {
             var dt = new DateTime(1999, 12, 31, 23, 59, 0);
             var nvalue = this.Settings.Get<DateTime?>("DateTimeNullTest");
             Assert.IsNull(nvalue, "Should be null");
@@ -109,7 +109,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-		public void SetOverride() {
+		public virtual void SetOverride() {
 			this.Settings.Set("Test", "1");
 			this.Settings.Set("Test", "2");
 			var r = this.Settings.Get<string>("Test");
@@ -122,7 +122,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public void ContainsTest() {
+        public virtual void ContainsTest() {
             var flag = this.Settings.Contains(Guid.NewGuid().ToString());
             Assert.IsFalse(flag, "Contains should have returned false");
 
@@ -137,7 +137,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public void RemoveTest() {
+        public virtual void RemoveTest() {
             this.Settings.Set("Test", "1");
             var flag = this.Settings.Remove("Test");
             Assert.IsTrue(flag, "Remove should have returned success");
@@ -149,7 +149,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public void LongTest() {
+        public virtual void LongTest() {
             long value = 1;
             this.Settings.Set("LongTest", value);
             var value2 = this.Settings.Get<long>("LongTest");
@@ -162,7 +162,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-		public void GuidTest() {
+		public virtual void GuidTest() {
 			var guid = this.Settings.Get<Guid>("GuidTest");
 			Assert.AreEqual(Guid.Empty, guid);
 
@@ -178,7 +178,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public void SetNullRemoves() {
+        public virtual void SetNullRemoves() {
             this.Settings.Set("SetNullRemoves", "Blah");
             this.Settings.Set<string>("SetNullRemoves", null);
             var contains = this.Settings.Contains("SetNullRemoves");
@@ -191,7 +191,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public void SetDefaultTRemoves() {
+        public virtual void SetDefaultRemoves() {
             long value = 1;
             this.Settings.Set("SetDefaultTRemoves", value);
             this.Settings.Set<long>("SetDefaultTRemoves", default(long));
@@ -205,7 +205,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-		public void GetDefaultParameter() {
+		public virtual void GetDefaultParameter() {
 			var tmp = Guid.NewGuid().ToString();
 			var r = this.Settings.Get("GetDefaultParameter", tmp);
 			Assert.AreEqual(r, tmp);
@@ -217,7 +217,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public void TryDefaults() {
+        public virtual void TryDefaults() {
             var flag = this.Settings.SetDefault("TryDefaults", "Initial Value");
             Assert.IsTrue(flag, "Default value could not be set");
 
@@ -234,7 +234,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public void ClearPreserveList() {
+        public virtual void ClearPreserveList() {
             this.Settings.Set("ClearPreserveTest", "Value");
             this.Settings.KeysNotToClear.Add("ClearPreserveTest");
             this.Settings.Clear();
