@@ -31,7 +31,7 @@ namespace Acr.Settings.Tests {
 #else
         [Test]
 #endif
-        public async void OnSettingChanged() {
+        public async Task OnSettingChanged() {
             var tcs = new TaskCompletionSource<SettingChangeEventArgs>();
 			this.Settings.Changed += (sender, args) => tcs.TrySetResult(args);
 
