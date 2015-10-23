@@ -138,7 +138,7 @@
       <Name>Acr.Settings.WindowsPhone</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\..\src\Acr.Settings.Shared\Acr.Settings.Shared.projitems" Label="Shared" />
+  <Import Project="..\Acr.Settings.Tests\Acr.Settings.Tests.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -70,7 +70,7 @@ Global
 		Acr.Settings.Shared\Acr.Settings.Shared.projitems*{493754b8-c77c-41a3-97aa-6bb895e408fe}*SharedItemsImports = 4
 		Acr.Settings.Shared\Acr.Settings.Shared.projitems*{7e9e7c1c-9235-4d46-bf4c-ca6a0c8b6e29}*SharedItemsImports = 4
 		..\tests\Acr.Settings.Tests\Acr.Settings.Tests.projitems*{cad5f2f4-842a-4d67-a862-7668c442e8ed}*SharedItemsImports = 4
-		Acr.Settings.Shared\Acr.Settings.Shared.projitems*{91ed9181-1613-4c5d-9889-cfa0a402ac1e}*SharedItemsImports = 4
+		..\tests\Acr.Settings.Tests\Acr.Settings.Tests.projitems*{91ed9181-1613-4c5d-9889-cfa0a402ac1e}*SharedItemsImports = 4
 		Acr.Settings.Shared\Acr.Settings.Shared.projitems*{8415dfd1-2b81-44d2-8779-fdd4346be271}*SharedItemsImports = 4
 		..\tests\Acr.Settings.Tests\Acr.Settings.Tests.projitems*{0e2d6677-ad1a-44e9-88dc-f94c2ed55cb1}*SharedItemsImports = 4
 		..\tests\Acr.Settings.Tests\Acr.Settings.Tests.projitems*{190b3c22-2763-4316-a93a-631995eb07ad}*SharedItemsImports = 13
