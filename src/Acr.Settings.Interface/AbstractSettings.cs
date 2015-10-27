@@ -92,7 +92,8 @@ namespace Acr.Settings {
 
 
 		protected virtual void OnChanged(SettingChangeEventArgs args) {
-			this.Changed?.Invoke(this, args);
+            if (this.Changed != null)
+			    this.Changed.Invoke(this, args);
             var native = this.NativeValues();
             this.List = new ReadOnlyDictionary<string, string>(native);
 		}
@@ -101,9 +102,11 @@ namespace Acr.Settings {
         protected virtual string Serialize(Type type, object value) {
             if (type == typeof(string))
                 return (string)value;
-
-            if (this.IsStringifyType(type))
-                return value.ToString();
+            
+            if (this.IsStringifyType(type)) {
+                var formattable = value as IFormattable;
+                return formattable.ToString(null, System.Globalization.CultureInfo.InvariantCulture);
+            }
 
             return JsonConvert.SerializeObject(value);
         }
@@ -114,7 +117,7 @@ namespace Acr.Settings {
                 return value;
 
             if (this.IsStringifyType(type))
-                return Convert.ChangeType(value, type);
+                return Convert.ChangeType(value, type, System.Globalization.CultureInfo.InvariantCulture);
 
             return JsonConvert.DeserializeObject(value, type);
         }
