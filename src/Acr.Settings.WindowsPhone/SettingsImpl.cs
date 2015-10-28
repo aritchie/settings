@@ -29,6 +29,8 @@ namespace Acr.Settings {
 
             foreach (var key in keys)
                 this.container.Remove(key);
+
+            this.container.Save();
         }
 
 
