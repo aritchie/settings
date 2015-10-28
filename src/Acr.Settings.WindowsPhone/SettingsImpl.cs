@@ -42,11 +42,13 @@ namespace Acr.Settings {
         protected override void NativeSet(Type type, string key, object value) {
             var @string = this.Serialize(type, value);
             this.container[key] = @string;
+            this.container.Save();
         }
 
 
         protected override void NativeRemove(string key) {
             this.container.Remove(key);
+            this.container.Save();
         }
 
 
