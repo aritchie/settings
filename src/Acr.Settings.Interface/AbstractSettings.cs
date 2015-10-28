@@ -111,7 +111,7 @@ namespace Acr.Settings {
                     : format.ToString(null, System.Globalization.CultureInfo.InvariantCulture);
             }
 
-            return JsonConvert.SerializeObject(value);
+            return JsonConvert.SerializeObject(value, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto });
         }
 
 
@@ -122,7 +122,7 @@ namespace Acr.Settings {
             if (this.IsStringifyType(type))
                 return Convert.ChangeType(value, type, System.Globalization.CultureInfo.InvariantCulture);
 
-            return JsonConvert.DeserializeObject(value, type);
+            return JsonConvert.DeserializeObject(value, type, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto });
         }
 
 
