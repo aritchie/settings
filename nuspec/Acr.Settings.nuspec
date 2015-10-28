@@ -25,6 +25,8 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
         <releaseNotes>
 4.3.6
 [feature] netfx now has dbsettings provider
+[fix][wp8] flush settings thanks to @petero-dk
+[fix] globalization of formattable types thanks to @petero-dk
 
 4.3.5
 [fix] winphone silverlight client on wp8.  special thanks to @petero-dk

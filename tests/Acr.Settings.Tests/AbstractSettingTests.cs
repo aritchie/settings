@@ -1,4 +1,6 @@
 using System;
+using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 #if MSTESTS
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
@@ -240,6 +242,21 @@ namespace Acr.Settings.Tests {
             this.Settings.Clear();
             var value = this.Settings.Get<string>("ClearPreserveTest");
             Assert.AreEqual("Value", value);
+        }
+
+
+#if MSTESTS
+        [TestMethod]
+#else
+        [Test]
+#endif
+        public virtual void CultureFormattingTest() {
+            var value = 11111.1111m;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            this.Settings.Set("CultureFormattingTest", value);
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("ja-JP");
+            var newValue = this.Settings.Get<decimal>("CultureFormattingTest");
+            Assert.AreEqual(value, newValue);
         }
     }
 }
