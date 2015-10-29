@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace Acr.Settings {
 
     public interface ISettings {
+
+        JsonSerializerSettings JsonSerializerSettings { get; set; }
 
         bool IsRoamingProfile { get; }
 

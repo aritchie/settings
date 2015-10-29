@@ -15,7 +15,7 @@ namespace Acr.Settings {
         public bool IsRoamingProfile { get; protected set; }
         public List<string> KeysNotToClear { get; set; }
         public virtual IReadOnlyDictionary<string, string> List { get; protected set; }
-
+        public JsonSerializerSettings JsonSerializerSettings { get; set; }
 
         protected AbstractSettings() {
             this.KeysNotToClear = new List<string>();
@@ -111,7 +111,7 @@ namespace Acr.Settings {
                     : format.ToString(null, System.Globalization.CultureInfo.InvariantCulture);
             }
 
-            return JsonConvert.SerializeObject(value);
+            return JsonConvert.SerializeObject(value, this.JsonSerializerSettings);
         }
 
 
@@ -122,7 +122,7 @@ namespace Acr.Settings {
             if (this.IsStringifyType(type))
                 return Convert.ChangeType(value, type, System.Globalization.CultureInfo.InvariantCulture);
 
-            return JsonConvert.DeserializeObject(value, type);
+            return JsonConvert.DeserializeObject(value, type, this.JsonSerializerSettings);
         }
 
 
