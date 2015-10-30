@@ -42,18 +42,6 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeClear() {
-            this.UoW((prefs, x) => {
-                 prefs
-                     .All
-                     .Keys
-                     .Where(this.ShouldClear)
-                     .ToList()
-                     .ForEach(y => x.Remove(y));
-            });
-        }
-
-
         protected override object NativeGet(Type type, string key) {
             using (var prefs = this.GetPreferences()) {
                 var typeCode = Type.GetTypeCode(type);
@@ -116,8 +104,11 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeRemove(string key) {
-            this.UoW((prefs, x) => x.Remove(key));
+        protected override void NativeRemove(string[] keys) {
+            this.UoW((prefs, x) => {
+                foreach (var key in keys)
+                    x.Remove(key);
+            });
         }
 
 

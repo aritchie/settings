@@ -35,14 +35,9 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeClear() {
-            // TODO: protected values
-            this.settings.Clear();
-        }
-
-
-        protected override void NativeRemove(string key) {
-            this.settings.Remove(key);
+        protected override void NativeRemove(string[] keys) {
+            foreach (var key in keys)
+                this.settings.Remove(key);
         }
     }
 }

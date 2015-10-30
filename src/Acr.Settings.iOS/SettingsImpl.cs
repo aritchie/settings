@@ -40,16 +40,6 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeClear() {
-            var values = this.NativeValues();
-            foreach (var item in values)
-                if (this.ShouldClear(item.Key))
-                    this.prefs.RemoveObject(item.Key);
-
-            this.prefs.Synchronize();
-        }
-
-
         protected override object NativeGet(Type type, string key) {
             var typeCode = Type.GetTypeCode(type);
             switch (typeCode) {
@@ -105,8 +95,10 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeRemove(string key) {
-            this.prefs.RemoveObject(key);
+        protected override void NativeRemove(string[] keys) {
+            foreach (var key in keys)
+                this.prefs.RemoveObject(key);
+
             this.prefs.Synchronize();
         }
 

@@ -16,17 +16,6 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeClear() {
-            var prefs = NSUbiquitousKeyValueStore.DefaultStore;
-            var values = this.NativeValues();
-            foreach (var item in values)
-                if (this.ShouldClear(item.Key))
-                    prefs.Remove(item.Key);
-
-            prefs.Synchronize();
-        }
-
-
         protected override void NativeSet(Type type, string key, object value) {
             var typeCode = Type.GetTypeCode(type);
             switch (typeCode) {
@@ -80,8 +69,10 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeRemove(string key) {
-            this.Store.Remove(key);
+        protected override void NativeRemove(string[] keys) {
+            foreach (var key in keys)
+                this.Store.Remove(key);
+
             this.Store.Synchronize();
         }
 

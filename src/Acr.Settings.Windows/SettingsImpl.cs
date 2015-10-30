@@ -23,18 +23,6 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeClear() {
-            var keys = this.container
-                .Values
-                .Where(x => this.ShouldClear(x.Key))
-                .Select(x => x.Key)
-                .ToList();
-
-            foreach (var key in keys)
-                this.container.Values.Remove(key);
-        }
-
-
         protected override object NativeGet(Type type, string key) {
             var @string = (string)this.container.Values[key];
             var @object = this.Deserialize(type, @string);
@@ -48,8 +36,9 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeRemove(string key) {
-            this.container.Values.Remove(key);
+        protected override void NativeRemove(string[] keys) {
+            foreach (var key in keys)
+                this.container.Values.Remove(key);
         }
 
 

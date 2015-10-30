@@ -17,6 +17,7 @@ namespace Acr.Settings {
         public virtual IReadOnlyDictionary<string, string> List { get; protected set; }
         public JsonSerializerSettings JsonSerializerSettings { get; set; }
 
+
         protected AbstractSettings() {
             this.KeysNotToClear = new List<string>();
         }
@@ -80,13 +81,18 @@ namespace Acr.Settings {
             if (!this.Contains(key))
                 return false;
 
-            this.NativeRemove(key);
+            this.NativeRemove(new [] { key });
             return true;
         }
 
 
         public virtual void Clear() {
-            this.NativeClear();
+            var keys = this.NativeValues()
+                .Where(x => this.ShouldClear(x.Key))
+                .Select(x => x.Key)
+                .ToArray();
+
+            this.NativeRemove(keys);
             this.OnChanged(new SettingChangeEventArgs(SettingChangeAction.Clear, null, null));
         }
 
@@ -156,10 +162,9 @@ namespace Acr.Settings {
 
         public abstract bool Contains(string key);
 
-        protected abstract void NativeClear();
         protected abstract object NativeGet(Type type, string key);
         protected abstract void NativeSet(Type type, string key, object value);
-        protected abstract void NativeRemove(string key);
+        protected abstract void NativeRemove(string[] keys);
         protected abstract IDictionary<string, string> NativeValues();
     }
 }

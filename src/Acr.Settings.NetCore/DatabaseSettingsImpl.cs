@@ -47,21 +47,6 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeClear() {
-            this.Init();
-            lock (this.items) {
-                var list = this.items
-                    .Where(x => this.ShouldClear(x.Key))
-                    .ToList();
-
-                foreach (var item in list) {
-                    this.items.Remove(item.Key);
-                    this.Execute($"DELETE FROM {this.TableName} WHERE Environment = '{this.Environment}' AND ApplicationName = '{this.ApplicationName}'");
-                }
-            }
-        }
-
-
         protected override object NativeGet(Type type, string key) {
             this.Init();
             lock (this.items) {
@@ -86,11 +71,14 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeRemove(string key) {
+        protected override void NativeRemove(string[] keys) {
             this.Init();
             lock (this.items) {
-                this.Execute($"DELETE FROM {this.TableName} WHERE Environment = '{this.Environment}' AND ApplicationName = '{this.ApplicationName}' AND SettingKey = '{key}'");
-                this.items.Remove(key);
+                // TODO: remove singular deletes
+                foreach (var key in keys) {
+                    this.Execute($"DELETE FROM {this.TableName} WHERE Environment = '{this.Environment}' AND ApplicationName = '{this.ApplicationName}' AND SettingKey = '{key}'");
+                    this.items.Remove(key);
+                }
             }
         }
 
