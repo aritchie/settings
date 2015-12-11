@@ -117,7 +117,7 @@
       <Link>SettingsImpl.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Properties\Acr.Settings.rd.xml" />
+    <EmbeddedResource Include="Properties\Acr.Settings.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Acr.Settings.Interface\Acr.Settings.Interface.csproj">
