@@ -20,9 +20,12 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>windows uwp winphone android ios xamarin xam.pcl settings</tags>
         <dependencies>
-            <dependency id="Newtonsoft.Json" version="[7.0.1, 8.0)" />
+            <dependency id="Newtonsoft.Json" version="[7.0.1, 9.0)" />
         </dependencies>
         <releaseNotes>
+4.3.8
+allow json.net 8
+
 4.3.7
 [fix][uwp] fix rd.xml
 
