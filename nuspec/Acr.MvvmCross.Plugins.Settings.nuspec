@@ -15,7 +15,7 @@
             <dependency id="Acr.Settings" version="[5.0, 6.0)" />
         </dependencies>
         <releaseNotes>
-New roaming settings profile
+New strongly typed binding
         </releaseNotes>
     </metadata>
 </package>
