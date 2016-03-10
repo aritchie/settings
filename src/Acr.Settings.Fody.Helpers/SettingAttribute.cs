@@ -7,5 +7,6 @@ namespace Acr.Settings.Fody
     public class SettingAttribute : Attribute
     {
         //public object DefaultValue { get; set; }
+        //public bool IsSecure { get; set; }
     }
 }
