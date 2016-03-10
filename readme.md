@@ -19,6 +19,12 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
     Settings.Local.Set("Key", AnyObject); // converts to JSON
     var obj = Settings.Local.Get<AnyObject>("Key");
 
+##Strongly Typed Binding (works with all platforms - no fancy reflection that breaks on iOS)
+
+    var myInpcObj = Settings.Local.Bind<MyInpcObject>(); // Your object must implement INotifyPropertyChanged
+    myInpcObj.SomeProperty = "Hi"; // everything is automatically synchronized to settings right here
+
+
 ##Roaming Settings
 Used for things like iOS app groups and android wear.  It works the same way as Local (substitute with Roaming), but requires initialization.
 The namespace setting only applies to iOS and Android.
@@ -60,7 +66,7 @@ The namespace setting only applies to iOS and Android.
 
 *MvvmCross (manual - can use bootstrap below)*
 
-        Mvx.RegisterSingleton(Settings.Instance);
+        Mvx.RegisterSingleton(Settings.Local);
 
 
 ####For MvvmCross:
