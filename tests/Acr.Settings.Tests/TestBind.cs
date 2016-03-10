@@ -6,10 +6,30 @@ namespace Acr.Settings.Tests
 {
     public class TestBind : AbstractSettingObject
     {
-        public string StringProperty { get; set; }
-        public Guid? NullableProperty { get; set; }
+        string stringProperty;
+
+        public string StringProperty
+        {
+            get { return this.stringProperty; }
+            set { this.SetProperty(ref this.stringProperty, value); }
+        }
+
+
+        Guid? nullProperty;
+        public Guid? NullableProperty
+        {
+            get { return this.nullProperty; }
+            set { this.SetProperty(ref this.nullProperty, value); }
+        }
+
+
+        int? ignoredProperty;
 
         [Ignore]
-        public int? IgnoredProperty { get; set; }
+        public int? IgnoredProperty
+        {
+            get { return this.ignoredProperty; }
+            set { this.SetProperty(ref this.ignoredProperty, value); }
+        }
     }
 }

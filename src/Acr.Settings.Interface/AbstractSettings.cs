@@ -242,8 +242,10 @@ namespace Acr.Settings
                     prop.SetValue(obj, value);
                 }
             }
+            obj.PropertyChanged += this.OnPropertyChanged;
             return obj;
         }
+
 
 
         public virtual void UnBind(INotifyPropertyChanged obj, string prefix = null)
@@ -267,14 +269,14 @@ namespace Acr.Settings
 
         protected virtual void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            var info = this
+            var prop = this
                 .GetTypeProperties(sender.GetType())
                 .FirstOrDefault(x => x.Name.Equals(args.PropertyName));
 
-            if (info != null)
+            if (prop != null)
             {
-                var key = sender.GetType().Name + ".";
-                var value = info.GetValue(sender);
+                var key = $"{sender.GetType().Name}.{prop.Name}";
+                var value = prop.GetValue(sender);
                 this.SetValue(key, value);
             }
         }

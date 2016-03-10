@@ -272,7 +272,7 @@ namespace Acr.Settings.Tests {
 
             Assert.IsTrue(this.Settings.Contains("TestBind.StringProperty"));
             Assert.IsFalse(this.Settings.Contains("TestBind.IgnoredProperty"));
-            Assert.AreEqual("Hi", this.Settings.Get<string>("Hi"));
+            Assert.AreEqual("Hi", this.Settings.Get<string>("TestBind.StringProperty"));
         }
 
 
