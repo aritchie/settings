@@ -37,7 +37,9 @@
     <Compile Include="..\Acr.Settings.Shared\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AbstractSettingObject.cs" />
     <Compile Include="AbstractSettings.cs" />
+    <Compile Include="IgnoreAttribute.cs" />
     <Compile Include="InMemorySettingsImpl.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

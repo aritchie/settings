@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.MvvmCross.Plugins.Settings</id>
-        <version>4.3.5</version>
+        <version>5.0.0</version>
         <title>MvvmCross Settings Plugin</title>
         <description>Settings platform plugin for MvvmCross (iOS, Android, and Windows Phone)</description>
         <authors>Allan Ritchie</authors>
@@ -12,31 +12,10 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>xamarin mvvmcross settings</tags>
         <dependencies>
-            <dependency id="Acr.Settings" version="[4.3.5, 5.0)" />
-            <dependency id="MvvmCross.HotTuna.CrossCore" version="[3.5, 4.0)" />
+            <dependency id="Acr.Settings" version="[5.0, 6.0)" />
         </dependencies>
         <releaseNotes>
 New roaming settings profile
         </releaseNotes>
     </metadata>
-    <files>
-        <!-- PCL -->
-        <file src="..\src\Acr.MvvmCross.Plugins.Settings\bin\Release\Acr.MvvmCross.Plugins.Settings.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Acr.MvvmCross.Plugins.Settings.dll" />
-
-        <!-- droid -->
-        <file src="..\src\Acr.MvvmCross.Plugins.Settings\bin\Release\Acr.MvvmCross.Plugins.Settings.dll" target="lib\MonoAndroid10\Acr.MvvmCross.Plugins.Settings.dll" />
-        <file src="..\src\Acr.MvvmCross.Plugins.Settings.Droid\bin\Release\Acr.MvvmCross.Plugins.Settings.Droid.dll" target="lib\MonoAndroid10\Acr.MvvmCross.Plugins.Settings.Droid.dll" />
-        <file src="SettingsPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SettingsPluginBootstrap.cs.pp" />
-
-        <!-- touch -->
-        <file src="..\src\Acr.MvvmCross.Plugins.Settings\bin\Release\Acr.MvvmCross.Plugins.Settings.dll" target="lib\Xamarin.iOS10\Acr.MvvmCross.Plugins.Settings.dll" />
-        <file src="..\src\Acr.MvvmCross.Plugins.Settings.Touch\bin\Release\Acr.MvvmCross.Plugins.Settings.Touch.dll" target="lib\Xamarin.iOS10\Acr.MvvmCross.Plugins.Settings.Touch.dll" />
-        <file src="TouchSettingsPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SettingsPluginBootstrap.cs.pp" />
-
-        <!--winphone-->
-        <file src="..\src\Acr.MvvmCross.Plugins.Settings\bin\Release\Acr.MvvmCross.Plugins.Settings.dll" target="lib\wp8\Acr.MvvmCross.Plugins.Settings.dll" />
-        <file src="..\src\Acr.MvvmCross.Plugins.Settings.WinPhone\bin\Release\Acr.MvvmCross.Plugins.Settings.WindowsPhone.dll" target="lib\wp8\Acr.MvvmCross.Plugins.Settings.WindowsPhone.dll" />
-        <file src="SettingsPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SettingsPluginBootstrap.cs.pp" />
-
-    </files>
 </package>

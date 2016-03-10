@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>4.3.9</version>
+        <version>5.0.0</version>
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
@@ -23,6 +23,9 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
             <dependency id="Newtonsoft.Json" version="[7.0.1, 9.0)" />
         </dependencies>
         <releaseNotes>
+5.0.0
+[feature] binds to an object for bidirectional settings on a strongly typed object
+
 4.3.9
 [fix][uwp] set action to ignore for rd.xml
 
