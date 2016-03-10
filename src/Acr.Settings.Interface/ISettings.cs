@@ -100,7 +100,7 @@ namespace Acr.Settings {
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="prefix">Set this if you want to send multiple objects of this type to settings - otherwise default of type name is assumed</param>
-        void Bind<T>() where T : INotifyPropertyChanged, new();
+        T Bind<T>() where T : INotifyPropertyChanged, new();
 
         /// <summary>
         /// Unbinds an object from monitoring

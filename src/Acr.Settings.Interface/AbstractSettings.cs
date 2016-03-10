@@ -227,7 +227,7 @@ namespace Acr.Settings
         }
 
 
-        public virtual void Bind<T>() where T : INotifyPropertyChanged, new()
+        public virtual T Bind<T>() where T : INotifyPropertyChanged, new()
         {
             var obj = new T();
             var prefix = typeof(T).Name + ".";
@@ -242,6 +242,7 @@ namespace Acr.Settings
                     prop.SetValue(obj, value);
                 }
             }
+            return obj;
         }
 
 

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InMemorySettingTests.cs" />
     <Compile Include="AppConfigSettingTests.cs" />
     <Compile Include="DatabaseSettingsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

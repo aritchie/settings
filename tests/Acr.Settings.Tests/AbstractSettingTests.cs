@@ -245,11 +245,9 @@ namespace Acr.Settings.Tests {
         }
 
 
-#if MSTESTS
-        [TestMethod]
-#else
+#if !WINDOWS_UWP && !WINDOWS_PHONE
+
         [Test]
-#endif
         public virtual void CultureFormattingTest() {
             var value = 11111.1111m;
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
@@ -257,6 +255,39 @@ namespace Acr.Settings.Tests {
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("ja-JP");
             var newValue = this.Settings.Get<decimal>("CultureFormattingTest");
             Assert.AreEqual(value, newValue);
+        }
+#endif
+
+
+#if MSTESTS
+        [TestMethod]
+#else
+        [Test]
+#endif
+        public virtual void Binding_Basic()
+        {
+            var obj = this.Settings.Bind<TestBind>();
+            obj.IgnoredProperty = 0;
+            obj.StringProperty = "Hi";
+
+            Assert.IsTrue(this.Settings.Contains("TestBind.StringProperty"));
+            Assert.IsFalse(this.Settings.Contains("TestBind.IgnoredProperty"));
+            Assert.AreEqual("Hi", this.Settings.Get<string>("Hi"));
+        }
+
+
+#if MSTESTS
+        [TestMethod]
+#else
+        [Test]
+#endif
+        public virtual void Binding_Persist()
+        {
+            var obj = this.Settings.Bind<TestBind>();
+            obj.StringProperty = "Binding_Persist";
+
+            var obj2 = this.Settings.Bind<TestBind>();
+            Assert.AreEqual(obj.StringProperty, obj2.StringProperty);
         }
     }
 }
