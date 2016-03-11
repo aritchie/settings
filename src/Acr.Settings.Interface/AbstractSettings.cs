@@ -230,8 +230,16 @@ namespace Acr.Settings
         public virtual T Bind<T>() where T : INotifyPropertyChanged, new()
         {
             var obj = new T();
-            var prefix = typeof(T).Name + ".";
-            var props = this.GetTypeProperties(typeof(T));
+            this.Bind(obj);
+            return obj;
+        }
+
+
+        public virtual void Bind(INotifyPropertyChanged obj)
+        {
+            var type = obj.GetType();
+            var prefix = type.Name + ".";
+            var props = this.GetTypeProperties(type);
 
             foreach (var prop in props)
             {
@@ -243,12 +251,10 @@ namespace Acr.Settings
                 }
             }
             obj.PropertyChanged += this.OnPropertyChanged;
-            return obj;
         }
 
 
-
-        public virtual void UnBind(INotifyPropertyChanged obj, string prefix = null)
+        public virtual void UnBind(INotifyPropertyChanged obj)
         {
             obj.PropertyChanged -= this.OnPropertyChanged;
         }

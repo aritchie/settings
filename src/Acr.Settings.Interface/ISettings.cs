@@ -103,10 +103,15 @@ namespace Acr.Settings {
         T Bind<T>() where T : INotifyPropertyChanged, new();
 
         /// <summary>
+        /// Bind to existing instance
+        /// </summary>
+        /// <param name="obj"></param>
+        void Bind(INotifyPropertyChanged obj);
+
+        /// <summary>
         /// Unbinds an object from monitoring
         /// </summary>
         /// <param name="obj"></param>
-        /// <param name="prefix"></param>
-        void UnBind(INotifyPropertyChanged obj, string prefix = null);
+        void UnBind(INotifyPropertyChanged obj);
     }
 }

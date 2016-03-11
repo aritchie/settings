@@ -24,6 +24,11 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
     var myInpcObj = Settings.Local.Bind<MyInpcObject>(); // Your object must implement INotifyPropertyChanged
     myInpcObj.SomeProperty = "Hi"; // everything is automatically synchronized to settings right here
 
+    //From your viewmodel
+    Settings.Local.Bind(this);
+
+    // make sure to unbind when your model is done
+    Settings.Local.UnBind(obj);
 
 ##Roaming Settings
 Used for things like iOS app groups and android wear.  It works the same way as Local (substitute with Roaming), but requires initialization.
