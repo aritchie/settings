@@ -22,7 +22,7 @@ namespace Acr.Settings {
             var ctx = Application.Context.ApplicationContext;
             return this.nameSpace == null
                 ? PreferenceManager.GetDefaultSharedPreferences(ctx)
-                : ctx.GetSharedPreferences(this.nameSpace, FileCreationMode.Append);
+                : ctx.GetSharedPreferences(this.nameSpace, FileCreationMode.WorldWriteable);
         }
 
 
