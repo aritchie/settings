@@ -6,29 +6,36 @@ using Android.Content;
 using Android.Preferences;
 
 
-namespace Acr.Settings {
+namespace Acr.Settings
+{
 
-    public class SettingsImpl : AbstractSettings {
+    public class SettingsImpl : AbstractSettings
+    {
         readonly string nameSpace;
 
 
-        public SettingsImpl(string nameSpace) {
+        public SettingsImpl(string nameSpace)
+        {
             this.nameSpace = nameSpace;
             this.IsRoamingProfile = (nameSpace != null);
         }
 
 
-        private ISharedPreferences GetPreferences() {
+        private ISharedPreferences GetPreferences()
+        {
             var ctx = Application.Context.ApplicationContext;
             return this.nameSpace == null
                 ? PreferenceManager.GetDefaultSharedPreferences(ctx)
-                : ctx.GetSharedPreferences(this.nameSpace, FileCreationMode.Append);
+                : ctx.GetSharedPreferences(this.nameSpace, FileCreationMode.WorldWriteable);
         }
 
 
-        private void UoW(Action<ISharedPreferences, ISharedPreferencesEditor> doWork) {
-            using (var prefs = this.GetPreferences()) {
-                using (var editor = prefs.Edit()) {
+        private void UoW(Action<ISharedPreferences, ISharedPreferencesEditor> doWork)
+        {
+            using (var prefs = this.GetPreferences())
+            {
+                using (var editor = prefs.Edit())
+                {
                     doWork(prefs, editor);
                     editor.Commit();
                 }
@@ -36,16 +43,20 @@ namespace Acr.Settings {
         }
 
 
-        public override bool Contains(string key) {
+        public override bool Contains(string key)
+        {
             using (var prefs = this.GetPreferences())
                 return prefs.Contains(key);
         }
 
 
-        protected override object NativeGet(Type type, string key) {
-            using (var prefs = this.GetPreferences()) {
+        protected override object NativeGet(Type type, string key)
+        {
+            using (var prefs = this.GetPreferences())
+            {
                 var typeCode = Type.GetTypeCode(type);
-                switch (typeCode) {
+                switch (typeCode)
+                {
 
                     case TypeCode.Boolean:
                         return prefs.GetBoolean(key, false);
@@ -70,10 +81,13 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeSet(Type type, string key, object value) {
-            this.UoW((prefs, x) => {
+        protected override void NativeSet(Type type, string key, object value)
+        {
+            this.UoW((prefs, x) =>
+            {
                 var typeCode = Type.GetTypeCode(type);
-                switch (typeCode) {
+                switch (typeCode)
+                {
 
                     case TypeCode.Boolean:
                         x.PutBoolean(key, (bool)value);
@@ -104,15 +118,18 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeRemove(string[] keys) {
-            this.UoW((prefs, x) => {
+        protected override void NativeRemove(string[] keys)
+        {
+            this.UoW((prefs, x) =>
+            {
                 foreach (var key in keys)
                     x.Remove(key);
             });
         }
 
 
-        protected override IDictionary<string, string> NativeValues() {
+        protected override IDictionary<string, string> NativeValues()
+        {
             using (var prefs = this.GetPreferences())
                 return prefs.All.ToDictionary(
                     x => x.Key,

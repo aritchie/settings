@@ -44,12 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SettingsImpl.cs" />
-    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Values\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Acr.Settings.Interface\Acr.Settings.Interface.csproj">
       <Project>{ebdadceb-d1b4-4fe4-9873-04cd80edad45}</Project>
