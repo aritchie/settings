@@ -6,7 +6,7 @@ namespace Acr.Settings {
     public static class Settings {
         static readonly Lazy<ISettings> localInit = new Lazy<ISettings>(() => CreateInstance(), false);
 
-#if __ANDROID__ || __IOS__
+#if __ANDROID__ || __IOS__ || __MAC__
         public static void InitRoaming(string nameSpace) {
             Roaming = CreateInstance(nameSpace);
         }
@@ -38,7 +38,7 @@ namespace Acr.Settings {
 
 
         public static ISettings CreateInstance(string nameSpace = null) {
-#if __ANDROID__ || __IOS__
+#if __ANDROID__ || __IOS__ || __MAC__
             return new SettingsImpl(nameSpace);
 #elif NET_CORE
             return new AppConfigSettingsImpl();
