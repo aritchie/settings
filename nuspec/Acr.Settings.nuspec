@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>5.1.0</version>
+        <version>5.1.1</version>
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
@@ -20,9 +20,12 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>windows uwp winphone android ios xamarin xam.pcl settings</tags>
         <dependencies>
-            <dependency id="Newtonsoft.Json" version="[8.0.2, 9.0)" />
+            <dependency id="Newtonsoft.Json" version="[8.0.2, 10.0)" />
         </dependencies>
         <releaseNotes>
+5.1.1
+update to allow JSON.NET to update to v9
+
 5.1.0
 [feature] bind to existing objects.  great for viewmodels.  make sure if you bind, you unbind when your viewmodel is done!
 
