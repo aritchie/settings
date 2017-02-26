@@ -235,3 +235,7 @@ src/Acr.Settings.userprefs
 /src/Acr.Settings.Uap.Tests/project.lock.json
 /src/.vs/config/applicationhost.config
 /tests/Acr.Settings.Uap.Tests/project.lock.json
+/src/Acr.Settings.Android/Acr.Settings.Android.csproj.bak
+/tests/Acr.Settings.Android.Tests/Acr.Settings.Android.Tests.csproj.bak
+*.bak
+*.bak
