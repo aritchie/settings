@@ -3,12 +3,15 @@ using Acr.Settings.Tests;
 using NUnit.Framework;
 
 
-namespace Acr.Settings.NetCore.Tests {
+namespace Acr.Settings.NetCore.Tests
+{
 
     [TestFixture]
-    public class AppConfigSettingTests : AbstractSettingTests {
+    public class AppConfigSettingTests : AbstractSettingTests
+    {
 
-        protected override ISettings Create() {
+        protected override ISettings Create()
+        {
             return new AppConfigSettingsImpl("test.config");
         }
     }
