@@ -11,36 +11,28 @@ namespace Acr.Settings
 
     public class SettingsImpl : AbstractSettings
     {
-        readonly string nameSpace;
-        readonly object syncLock;
+        readonly object syncLock = new object();
         ISharedPreferences prefs;
 
 
-        public SettingsImpl(string nameSpace)
+        public ISharedPreferences Prefs
         {
-            this.syncLock = new object();
-            this.nameSpace = nameSpace;
-            this.IsRoamingProfile = (nameSpace != null);
+            get
+            {
+                var ctx = Application.Context.ApplicationContext;
+                this.prefs = this.prefs ?? PreferenceManager.GetDefaultSharedPreferences(ctx);
+                return this.prefs;
+            }
         }
 
 
-        ISharedPreferences CreatePreferences()
-        {
-            var ctx = Application.Context.ApplicationContext;
-            return this.nameSpace == null
-                ? PreferenceManager.GetDefaultSharedPreferences(ctx)
-                : ctx.GetSharedPreferences(this.nameSpace, FileCreationMode.WorldWriteable);
-        }
-
-
-        void UoW(Action<ISharedPreferences, ISharedPreferencesEditor> doWork)
+        void UoW(Action<ISharedPreferencesEditor> doWork)
         {
             lock (this.syncLock)
             {
-                this.prefs = this.prefs ?? this.CreatePreferences();
-                using (var editor = prefs.Edit())
+                using (var editor = this.Prefs.Edit())
                 {
-                    doWork(prefs, editor);
+                    doWork(editor);
                     editor.Commit();
                 }
             }
@@ -50,10 +42,7 @@ namespace Acr.Settings
         public override bool Contains(string key)
         {
             lock (this.syncLock)
-            {
-                this.prefs = this.prefs ?? this.CreatePreferences();
-                return this.prefs.Contains(key);
-            }
+                return this.Prefs.Contains(key);
         }
 
 
@@ -61,28 +50,27 @@ namespace Acr.Settings
         {
             lock (this.syncLock)
             {
-                this.prefs = this.prefs ?? this.CreatePreferences();
                 var typeCode = Type.GetTypeCode(type);
                 switch (typeCode)
                 {
 
                     case TypeCode.Boolean:
-                        return this.prefs.GetBoolean(key, false);
+                        return this.Prefs.GetBoolean(key, false);
 
                     case TypeCode.Int32:
-                        return this.prefs.GetInt(key, 0);
+                        return this.Prefs.GetInt(key, 0);
 
                     case TypeCode.Int64:
-                        return this.prefs.GetLong(key, 0);
+                        return this.Prefs.GetLong(key, 0);
 
                     case TypeCode.Single:
-                        return this.prefs.GetFloat(key, 0);
+                        return this.Prefs.GetFloat(key, 0);
 
                     case TypeCode.String:
-                        return this.prefs.GetString(key, String.Empty);
+                        return this.Prefs.GetString(key, String.Empty);
 
                     default:
-                        var @string = this.prefs.GetString(key, String.Empty);
+                        var @string = this.Prefs.GetString(key, String.Empty);
                         return this.Deserialize(type, @string);
                 }
 
@@ -92,7 +80,7 @@ namespace Acr.Settings
 
         protected override void NativeSet(Type type, string key, object value)
         {
-            this.UoW((prefs, x) =>
+            this.UoW(x =>
             {
                 var typeCode = Type.GetTypeCode(type);
                 switch (typeCode)
@@ -129,7 +117,7 @@ namespace Acr.Settings
 
         protected override void NativeRemove(string[] keys)
         {
-            this.UoW((prefs, x) =>
+            this.UoW(x =>
             {
                 foreach (var key in keys)
                     x.Remove(key);
@@ -141,8 +129,7 @@ namespace Acr.Settings
         {
             lock (this.syncLock)
             {
-                this.prefs = this.prefs ?? this.CreatePreferences();
-                return this.prefs.All.ToDictionary(
+                return this.Prefs.All.ToDictionary(
                     x => x.Key,
                     x => x.Value.ToString()
                 );
