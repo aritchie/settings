@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>5.1.1</version>
+        <version>5.2.0</version>
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
@@ -23,145 +23,31 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
             <dependency id="Newtonsoft.Json" version="[8.0.2, 10.0)" />
         </dependencies>
         <releaseNotes>
-5.1.1
-update to allow JSON.NET to update to v9
-
-5.1.0
-[feature] bind to existing objects.  great for viewmodels.  make sure if you bind, you unbind when your viewmodel is done!
-
-5.0.0
-[feature] binds to an object for bidirectional settings on a strongly typed object
-
-4.3.9
-[fix][uwp] set action to ignore for rd.xml
-
-4.3.8
-allow json.net 8
-
-4.3.7
-[fix][uwp] fix rd.xml
-
-4.3.6
-[feature] netfx now has dbsettings provider
-[fix][wp8] flush settings thanks to @petero-dk
-[fix] globalization of formattable types thanks to @petero-dk
-
-4.3.5
-[fix] winphone silverlight client on wp8.  special thanks to @petero-dk
-[fix] serialization issues across all window platforms
-
-4.3.4
-[feature] base settings viewmodel
-[enhancement] better error messages for failed get/set calls
-
-4.3.3
-[feature] GetRequired call
-
-4.3.2
-[fix] WP8 registration
-
-4.3.1
-[fix] UAP registration
-[fix] appsettings optional ctor arg
-[fix] appsettings as default netcore implementation
-
-4.3.0
-Added UAP implementation
-Cleanup Shared and Interface library.  Abstract implementation and inmemory implementations now found in interface library.
-
-4.2.5
-Minor fix related to previous type cast issue
-Add in-memory settings for unit testing
-
-4.2.3
-[ios][fix] - type cast exception with nsuserdefaults nint to int
-
-4.2.2
-Update to JSON.NET 7.0.1
-
-4.2.1
-Nuspec fix
-
-4.2.0
-Interface library for better abstraction point
-Fix nuspec for WP8, WPA81, and windows
-Net45 implementation for registry and appsettings
-
-4.1.0
-Using native types internally on Android and iOS to allow use of PreferenceActivity and Settings Bundles
-New iOS iCloud settings implementation.  In AppDelegate, set Settings.Roaming = new Acr,Settings.iCloudSettingsImpl();
-New KeysNotToClear list to prevent Clear from removing a value.  Remove will still remove a key if specifically requested.
-Fix SetDefaults behaviour
-
-4.0.1
-Fixes to android profile
-
-4.0.0
-New roaming profile feature
-BREAKING - Settings.Instance has been renamed to Settings.Local
-
-3.0.4
-Fix nuspec - profile 259 pcl
-
-3.0.3
-Init is no longer necessary
-
-3.0.2
-Fix a leak that can occur on android
-
-3.0.1
-Add an Init for stupid linker issues
-
-3.0.0
-Vastly new underlying design and API
-Moving to bait and switch design
-
-2.1.1
-Fix iOS Settings issue
-
-2.1
-Better structure to observable dictionary of settings
-FIX: bug with resync calling clear event which removes some necessary iOS settings
-
-2.0
-Now works as an observable observable dictionary
-New extension methods for supporting several other data types
-
-1.0
-Initial Release
+5.2
+[feature][net45] AppSettings provider additional configuration parameters
+[feature][macOS] MacOS implementation
+[fix][droid] disposal race condition
+[breaking] Win8/WP is gone and it is NOT coming back
+[update] update to JSON.NET 10 so people stop asking!
         </releaseNotes>
     </metadata>
     <files>
         <!-- PCL -->
-        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.dll" target="lib\portable-net45+netcore45+win8+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.Settings.dll" />
-        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.Interface.dll" target="lib\portable-net45+netcore45+win8+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Acr.Settings.Interface.dll" />
+        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.*" target="lib\portable-net45+win8+wpa81+wp8" />
 
         <!-- android -->
-        <file src="..\src\Acr.Settings.Android\bin\Release\Acr.Settings.dll" target="lib\MonoAndroid10\Acr.Settings.dll" />
-        <file src="..\src\Acr.Settings.Android\bin\Release\Acr.Settings.Interface.dll" target="lib\MonoAndroid10\Acr.Settings.Interface.dll" />
+        <file src="..\src\Acr.Settings.Android\bin\Release\Acr.Settings.*" target="lib\MonoAndroid10" />
 
         <!-- ios -->
-        <file src="..\src\Acr.Settings.iOS\bin\iPhone\Release\Acr.Settings.dll" target="lib\Xamarin.iOS10\Acr.Settings.dll" />
-        <file src="..\src\Acr.Settings.iOS\bin\iPhone\Release\Acr.Settings.Interface.dll" target="lib\Xamarin.iOS10\Acr.Settings.Interface.dll" />
+        <file src="..\src\Acr.Settings.iOS\bin\iPhone\Release\Acr.Settings.*" target="lib\Xamarin.iOS10" />
 
-        <!-- wp8 -->
-        <file src="..\src\Acr.Settings.WindowsPhone\bin\Release\Acr.Settings.dll" target="lib\wp8\Acr.Settings.dll" />
-        <file src="..\src\Acr.Settings.WindowsPhone\bin\Release\Acr.Settings.Interface.dll" target="lib\wp8\Acr.Settings.Interface.dll" />
-
-        <!-- wpa81 -->
-        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.dll" target="lib\wpa81\Acr.Settings.dll" />
-        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.Interface.dll" target="lib\wpa81\Acr.Settings.Interface.dll" />
-
-        <!-- windows -->
-        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.dll" target="lib\win8\Acr.Settings.dll" />
-        <file src="..\src\Acr.Settings.Windows\bin\Release\Acr.Settings.Interface.dll" target="lib\win8\Acr.Settings.Interface.dll" />
+        <!-- mac -->
+        <file src="..\src\Acr.Settings.Mac\bin\Release\Acr.Settings.*" target="lib\Xamarin.Mac20" />
 
         <!--net45-->
-        <file src="..\src\Acr.Settings.NetCore\bin\Release\Acr.Settings.dll" target="lib\net45\Acr.Settings.dll" />
-        <file src="..\src\Acr.Settings.NetCore\bin\Release\Acr.Settings.Interface.dll" target="lib\net45\Acr.Settings.Interface.dll" />
+        <file src="..\src\Acr.Settings.Net\bin\Release\Acr.Settings.*" target="lib\net45" />
 
-        <!--uap-->
-        <file src="..\src\Acr.Settings.Uap\bin\Release\Acr.Settings.dll" target="lib\uap10.0\Acr.Settings.dll" />
-        <file src="..\src\Acr.Settings.Uap\bin\Release\Acr.Settings.Interface.dll" target="lib\uap10.0\Acr.Settings.Interface.dll" />
+        <!--uwp-->
+        <file src="..\src\Acr.Settings.Uwp\bin\Release\Acr.Settings.*" target="lib\uap10.0" />
     </files>
 </package>
