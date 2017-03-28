@@ -1,4 +1,4 @@
 ﻿using System.Reflection;
 
-[assembly: AssemblyTitle("Acr.Settings.Windows")]
+[assembly: AssemblyTitle("Acr.Settings.Net")]
 [assembly: AssemblyDescription("")]

@@ -35,11 +35,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -54,9 +51,9 @@
       <Project>{ebdadceb-d1b4-4fe4-9873-04cd80edad45}</Project>
       <Name>Acr.Settings.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Acr.Settings.NetCore\Acr.Settings.NetCore.csproj">
-      <Project>{1df7e24f-cd43-4394-aa3c-ba0f755ef92f}</Project>
-      <Name>Acr.Settings.NetCore</Name>
+    <ProjectReference Include="..\Acr.Settings.Net\Acr.Settings.Net.csproj">
+      <Project>{75d26df9-1bd2-4b7e-ac3e-bff1ed4e0ece}</Project>
+      <Name>Acr.Settings.Net</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
