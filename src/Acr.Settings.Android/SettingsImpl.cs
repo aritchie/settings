@@ -12,16 +12,19 @@ namespace Acr.Settings
     public class SettingsImpl : AbstractSettings
     {
         readonly string nameSpace;
+        readonly object syncLock;
+        ISharedPreferences prefs;
 
 
         public SettingsImpl(string nameSpace)
         {
+            this.syncLock = new object();
             this.nameSpace = nameSpace;
             this.IsRoamingProfile = (nameSpace != null);
         }
 
 
-        private ISharedPreferences GetPreferences()
+        ISharedPreferences CreatePreferences()
         {
             var ctx = Application.Context.ApplicationContext;
             return this.nameSpace == null
@@ -30,10 +33,11 @@ namespace Acr.Settings
         }
 
 
-        private void UoW(Action<ISharedPreferences, ISharedPreferencesEditor> doWork)
+        void UoW(Action<ISharedPreferences, ISharedPreferencesEditor> doWork)
         {
-            using (var prefs = this.GetPreferences())
+            lock (this.syncLock)
             {
+                this.prefs = this.prefs ?? this.CreatePreferences();
                 using (var editor = prefs.Edit())
                 {
                     doWork(prefs, editor);
@@ -45,38 +49,43 @@ namespace Acr.Settings
 
         public override bool Contains(string key)
         {
-            using (var prefs = this.GetPreferences())
-                return prefs.Contains(key);
+            lock (this.syncLock)
+            {
+                this.prefs = this.prefs ?? this.CreatePreferences();
+                return this.prefs.Contains(key);
+            }
         }
 
 
         protected override object NativeGet(Type type, string key)
         {
-            using (var prefs = this.GetPreferences())
+            lock (this.syncLock)
             {
+                this.prefs = this.prefs ?? this.CreatePreferences();
                 var typeCode = Type.GetTypeCode(type);
                 switch (typeCode)
                 {
 
                     case TypeCode.Boolean:
-                        return prefs.GetBoolean(key, false);
+                        return this.prefs.GetBoolean(key, false);
 
                     case TypeCode.Int32:
-                        return prefs.GetInt(key, 0);
+                        return this.prefs.GetInt(key, 0);
 
                     case TypeCode.Int64:
-                        return prefs.GetLong(key, 0);
+                        return this.prefs.GetLong(key, 0);
 
                     case TypeCode.Single:
-                        return prefs.GetFloat(key, 0);
+                        return this.prefs.GetFloat(key, 0);
 
                     case TypeCode.String:
-                        return prefs.GetString(key, String.Empty);
+                        return this.prefs.GetString(key, String.Empty);
 
                     default:
-                        var @string = prefs.GetString(key, String.Empty);
+                        var @string = this.prefs.GetString(key, String.Empty);
                         return this.Deserialize(type, @string);
                 }
+
             }
         }
 
@@ -130,11 +139,14 @@ namespace Acr.Settings
 
         protected override IDictionary<string, string> NativeValues()
         {
-            using (var prefs = this.GetPreferences())
-                return prefs.All.ToDictionary(
+            lock (this.syncLock)
+            {
+                this.prefs = this.prefs ?? this.CreatePreferences();
+                return this.prefs.All.ToDictionary(
                     x => x.Key,
                     x => x.Value.ToString()
                 );
+            }
         }
     }
 }
