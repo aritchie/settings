@@ -14,17 +14,13 @@ namespace Acr.Settings
 
         public SettingsImpl(bool isRoaming = false)
         {
-            this.IsRoamingProfile = isRoaming;
-            this.container = this.IsRoamingProfile
+            this.container = isRoaming
                 ? ApplicationData.Current.RoamingSettings
                 : ApplicationData.Current.LocalSettings;
         }
 
 
-        public override bool Contains(string key)
-        {
-            return this.container.Values.ContainsKey(key);
-        }
+        public override bool Contains(string key) => this.container.Values.ContainsKey(key);
 
 
         protected override object NativeGet(Type type, string key)
@@ -49,14 +45,12 @@ namespace Acr.Settings
         }
 
 
-        protected override IDictionary<string, string> NativeValues()
-        {
-            return this.container
+        protected override IDictionary<string, string> NativeValues() =>
+            this.container
                 .Values
                 .ToDictionary(
                     x => x.Key,
                     x => x.Value.ToString()
                 );
-        }
     }
 }

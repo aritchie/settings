@@ -28,17 +28,9 @@ namespace Acr.Settings
                 "UIDisableLegacyTextView",
                 "NSInterfaceStyle"
             };
-
-            if (nameSpace == null)
-            {
-                this.prefs = NSUserDefaults.StandardUserDefaults;
-                this.IsRoamingProfile = false;
-            }
-            else
-            {
-                this.prefs = new NSUserDefaults(nameSpace, NSUserDefaultsType.SuiteName);
-                this.IsRoamingProfile = true;
-            }
+            this.prefs = nameSpace == null
+                ? NSUserDefaults.StandardUserDefaults
+                : new NSUserDefaults(nameSpace, NSUserDefaultsType.SuiteName);
         }
 
 

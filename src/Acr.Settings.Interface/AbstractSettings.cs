@@ -27,7 +27,6 @@ namespace Acr.Settings
 
         public event EventHandler<SettingChangeEventArgs> Changed;
 
-        public bool IsRoamingProfile { get; protected set; }
         public List<string> KeysNotToClear { get; set; }
         public virtual IReadOnlyDictionary<string, string> List { get; protected set; }
         public JsonSerializerSettings JsonSerializerSettings { get; set; }

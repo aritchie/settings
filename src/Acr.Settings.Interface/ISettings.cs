@@ -4,13 +4,13 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 
 
-namespace Acr.Settings {
+namespace Acr.Settings
+{
 
-    public interface ISettings {
+    public interface ISettings
+    {
 
         JsonSerializerSettings JsonSerializerSettings { get; set; }
-
-        bool IsRoamingProfile { get; }
 
         /// <summary>
         /// Any values in this list will not be removed using clear
