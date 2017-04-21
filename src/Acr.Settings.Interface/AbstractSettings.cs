@@ -86,9 +86,11 @@ namespace Acr.Settings
                     : SettingChangeAction.Add;
 
                 if (value == null)
+                {
                     this.Remove(key);
-
-                else {
+                }
+                else
+                {
                     var type = this.UnwrapType(value.GetType());
                     this.NativeSet(type, key, value);
                     this.OnChanged(new SettingChangeEventArgs(action, key, value));
@@ -109,10 +111,14 @@ namespace Acr.Settings
                     ? SettingChangeAction.Update
                     : SettingChangeAction.Add;
 
-                if (EqualityComparer<T>.Default.Equals(value, default(T)))
-                    this.Remove(key);
+                var isDefault = EqualityComparer<T>.Default.Equals(value, default(T));
 
-                else {
+                if (isDefault && typeof(T).GetTypeInfo().IsClass)
+                {
+                    this.Remove(key);
+                }
+                else
+                {
                     var type = this.UnwrapType(typeof(T));
                     this.NativeSet(type, key, value);
                     this.OnChanged(new SettingChangeEventArgs(action, key, value));
