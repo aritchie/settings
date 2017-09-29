@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Settings</id>
-        <version>6.0.1</version>
+        <version>7.0.0</version>
         <title>ACR Settings Plugin for Xamarin and Windows</title>
         <summary>Quick and Easy Xplat Settings Plugin</summary>
         <description>
@@ -20,9 +20,12 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>windows uwp winphone android ios xamarin xam.pcl settings</tags>
         <dependencies>
-            <dependency id="Newtonsoft.Json" version="[8.0.2, 11)" />
+            <dependency id="Newtonsoft.Json" version="[10.0.1, 12)" />
         </dependencies>
         <releaseNotes>
+7.0
+.NET standard support is here
+
 6.0.1
 [fix] better handling of default values - simple types will still set instead of causing a remove, complex types will still be removed because NULL cannot be stored
 
@@ -35,8 +38,8 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
         </releaseNotes>
     </metadata>
     <files>
-        <!-- PCL -->
-        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.*" target="lib\portable-net45+win8+wpa81+wp8" />
+        <!-- netstandard -->
+        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.*" target="lib\netstandard1.0" />
 
         <!-- android -->
         <file src="..\src\Acr.Settings.Android\bin\Release\Acr.Settings.*" target="lib\MonoAndroid10" />
