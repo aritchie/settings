@@ -3,4 +3,7 @@
         <TargetFramework>netstandard1.0</TargetFramework>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     </PropertyGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Acr.Settings.Interface\Acr.Settings.Interface.csproj" />
+    </ItemGroup>
 </Project>
