@@ -20,7 +20,8 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>windows uwp winphone android ios xamarin xam.pcl settings</tags>
         <dependencies>
-            <dependency id="Newtonsoft.Json" version="[10.0.1, 12)" />
+            <dependency id="Netstandard.Library" version="[1.6.1,)" />
+            <dependency id="Newtonsoft.Json" version="[10.0.3, 12)" />
         </dependencies>
         <releaseNotes>
 7.0
@@ -39,7 +40,7 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
     </metadata>
     <files>
         <!-- netstandard -->
-        <file src="..\src\Acr.Settings\bin\Release\Acr.Settings.*" target="lib\netstandard1.0" />
+        <file src="..\src\Acr.Settings\bin\Release\netstandard1.0\Acr.Settings.*" target="lib\netstandard1.0" />
 
         <!-- android -->
         <file src="..\src\Acr.Settings.Android\bin\Release\Acr.Settings.*" target="lib\MonoAndroid10" />
