@@ -11,7 +11,7 @@ namespace Acr.Settings
         {
             get
             {
-#if PCL
+#if BAIT
                 if (current == null)
                     throw new ArgumentException("[Acr.Settings] Platform plugin not found.  Did you reference the nuget package in your platform project?");
 
