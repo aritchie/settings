@@ -73,6 +73,11 @@
       <Name>Acr.Settings.Interface</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>10.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="..\Acr.Settings.Tests\Acr.Settings.Tests.projitems" Label="Shared" Condition="Exists('..\Acr.Settings.Tests\Acr.Settings.Tests.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
