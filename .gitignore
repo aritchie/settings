@@ -239,3 +239,13 @@ src/Acr.Settings.userprefs
 /tests/Acr.Settings.Android.Tests/Acr.Settings.Android.Tests.csproj.bak
 *.bak
 *.bak
+src/.vs/Acr.Settings/v15/Server/sqlite3/storage.ide
+src/.vs/Acr.Settings/v15/Server/sqlite3/db.lock
+src/.vs/Acr.Settings/v15/Server/sqlite3/storage.ide-shm
+src/.vs/Acr.Settings/v15/Server/sqlite3/storage.ide-wal
+src/.vs/Acr.Settings/v15/sqlite3/db.lock
+src/.vs/Acr.Settings/v15/sqlite3/storage.ide
+src/.vs/Acr.Settings/v15/sqlite3/storage.ide-shm
+src/.vs/Acr.Settings/v15/sqlite3/storage.ide
+src/.vs/Acr.Settings/v15/sqlite3/storage.ide-wal
+src/Acr.Settings.Uwp/project.lock.json
