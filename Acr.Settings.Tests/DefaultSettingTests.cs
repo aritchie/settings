@@ -5,6 +5,9 @@ namespace Acr.Settings.Tests
 
     public class DefaultSettingTests : AbstractSettingTests
     {
-        public DefaultSettingTests() : base(Acr.Settings.Settings.Current) { }
+        public DefaultSettingTests()
+        {
+            this.Settings = Acr.Settings.Settings.Current;
+        }
     }
 }
