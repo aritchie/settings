@@ -249,3 +249,4 @@ src/.vs/Acr.Settings/v15/sqlite3/storage.ide-shm
 src/.vs/Acr.Settings/v15/sqlite3/storage.ide
 src/.vs/Acr.Settings/v15/sqlite3/storage.ide-wal
 src/Acr.Settings.Uwp/project.lock.json
+/.vs/Acr.Settings/v15/Server/sqlite3
