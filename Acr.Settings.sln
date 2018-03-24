@@ -10,12 +10,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		changelog.md = changelog.md
 		ISSUE_TEMPLATE = ISSUE_TEMPLATE
 		LICENSE.md = LICENSE.md
-		..\nuspec\nuget.exe = ..\nuspec\nuget.exe
-		..\nuspec\push.cmd = ..\nuspec\push.cmd
-		..\readme.md = ..\readme.md
+		nuget.exe = nuget.exe
+		push.cmd = push.cmd
+		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.Settings.Tests", "Acr.Settings.Tests\Acr.Settings.Tests.csproj", "{723437EF-46EF-4FD0-8508-AD2B02B6AE40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acr.Settings.Tests", "Acr.Settings.Tests\Acr.Settings.Tests.csproj", "{723437EF-46EF-4FD0-8508-AD2B02B6AE40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acr.Settings.Android.Tests", "Acr.Settings.Android.Tests\Acr.Settings.Android.Tests.csproj", "{085602AD-C50C-4F8B-BD1E-9FC2B3422935}"
 EndProject
