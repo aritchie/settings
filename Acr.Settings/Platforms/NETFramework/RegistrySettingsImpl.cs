@@ -27,9 +27,7 @@ namespace Acr.Settings
 
 
         public override bool Contains(string key)
-        {
-            return this.registry.GetValue(key, null) != null;
-        }
+            => this.registry.GetValue(key, null) != null;
 
 
         protected override object NativeGet(Type type, string key)
@@ -57,14 +55,11 @@ namespace Acr.Settings
         }
 
 
-        protected override IDictionary<string, string> NativeValues()
-        {
-            return this.registry
-                .GetValueNames()
-                .ToDictionary(
-                    x => x,
-                    x => (string)this.registry.GetValue(x)
-                );
-        }
+        protected override IDictionary<string, string> NativeValues() => this.registry
+            .GetValueNames()
+            .ToDictionary(
+                x => x,
+                x => (string)this.registry.GetValue(x)
+            );
     }
 }

@@ -4,21 +4,24 @@ using System.Linq;
 using Foundation;
 
 
-namespace Acr.Settings {
+namespace Acr.Settings
+{
 
-    public class iCloudSettingsImpl : AbstractSettings {
+    public class iCloudSettingsImpl : AbstractSettings
+    {
 
         protected NSUbiquitousKeyValueStore Store => NSUbiquitousKeyValueStore.DefaultStore;
 
 
-        public override bool Contains(string key) {
-            return (this.Store.ValueForKey(new NSString(key)) != null);
-        }
+        public override bool Contains(string key)
+            => (this.Store.ValueForKey(new NSString(key)) != null);
 
 
-        protected override void NativeSet(Type type, string key, object value) {
+        protected override void NativeSet(Type type, string key, object value)
+        {
             var typeCode = Type.GetTypeCode(type);
-            switch (typeCode) {
+            switch (typeCode)
+            {
 
                 case TypeCode.Boolean:
                     this.Store.SetBool(key, (bool)value);
@@ -46,9 +49,11 @@ namespace Acr.Settings {
         }
 
 
-        protected override object NativeGet(Type type, string key) {
+        protected override object NativeGet(Type type, string key)
+        {
             var typeCode = Type.GetTypeCode(type);
-            switch (typeCode) {
+            switch (typeCode)
+            {
 
                 case TypeCode.Boolean:
                     return this.Store.GetBool(key);
@@ -69,7 +74,8 @@ namespace Acr.Settings {
         }
 
 
-        protected override void NativeRemove(string[] keys) {
+        protected override void NativeRemove(string[] keys)
+        {
             foreach (var key in keys)
                 this.Store.Remove(key);
 
@@ -77,14 +83,13 @@ namespace Acr.Settings {
         }
 
 
-        protected override IDictionary<string, string> NativeValues() {
-            return this
+        protected override IDictionary<string, string> NativeValues()
+            => this
                 .Store
                 .ToDictionary()
                 .ToDictionary(
                     x => x.Key.ToString(),
                     x => x.Value.ToString()
                 );
-        }
     }
 }

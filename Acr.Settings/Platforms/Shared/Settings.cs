@@ -21,7 +21,7 @@ namespace Acr.Settings
                 return current;
 #endif
             }
-            set { current = value; }
+            set => current = value;
         }
     }
 }

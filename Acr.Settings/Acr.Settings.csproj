@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFrameworks></TargetFrameworks>
-        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard1.0;netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;xamarin.tvOS10;uap10.0</TargetFrameworks>
-        <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard1.0;netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;xamarin.tvOS10;</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard1.0;netstandard2.0;net45;net46;net47;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;xamarin.tvOS10;uap10.0</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard1.0;netstandard2.0;net45;net46;net47;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;xamarin.tvOS10;</TargetFrameworks>
         <Product>ACR Settings Plugin for Xamarin and Windows</Product>
         <Version>9.0.0</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -51,6 +51,11 @@ Cross Platform Settings Plugin for Xamarin and Windows.  Unlike other setting li
         <Product>Acr.Settings - macOS</Product>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(TargetFramework)' == 'net45' OR '$(TargetFramework)' == 'net46' OR '$(TargetFramework)' == 'net47' ">
+        <DefineConstants>$(DefineConstants);__NETFX__</DefineConstants>
+        <Product>Acr.Settings - Tizen</Product>
+    </PropertyGroup>
+
     <PropertyGroup Condition=" '$(TargetFramework)' == 'tizen4' ">
         <DefineConstants>$(DefineConstants);__TIZEN__</DefineConstants>
         <Product>Acr.Settings - Tizen</Product>
@@ -82,6 +87,12 @@ Cross Platform Settings Plugin for Xamarin and Windows.  Unlike other setting li
     <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' OR '$(TargetFramework)' == 'Xamarin.tvOS10' OR '$(TargetFramework)' == 'Xamarin.Mac20' ">
         <Compile Include="Platforms\Shared\**\*.cs" />
         <Compile Include="Platforms\Apple\**\*.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net45' OR '$(TargetFramework)' == 'net46' OR '$(TargetFramework)' == 'net47' ">
+        <Compile Include="Platforms\Shared\**\*.cs" />
+        <Compile Include="Platforms\NETFramework\**\*.cs" />
+        <Reference Include="System.Configuration" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">

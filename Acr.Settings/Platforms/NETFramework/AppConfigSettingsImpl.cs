@@ -72,8 +72,7 @@ namespace Acr.Settings
 
 
         protected override IDictionary<string, string> NativeValues()
-        {
-            return this.config
+            => this.config
                 .AppSettings
                 .Settings
                 .AllKeys
@@ -81,7 +80,6 @@ namespace Acr.Settings
                     x => x,
                     x => this.config.AppSettings.Settings[x].Value
                 );
-        }
 
 
         protected virtual void Flush()
