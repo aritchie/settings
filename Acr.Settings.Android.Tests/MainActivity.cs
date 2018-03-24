@@ -2,7 +2,6 @@
 using Acr.Settings.Tests;
 using Android.App;
 using Android.OS;
-using Xamarin.Forms;
 using Xunit.Runners.UI;
 
 
@@ -12,7 +11,7 @@ namespace Acr.Settings.Android.Tests
         Label = "Acr.Settings.Android.Tests",
         MainLauncher = true
     )]
-    public class MainActivity : TestSuiteActivity
+    public class MainActivity : RunnerActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
