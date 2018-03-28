@@ -10,6 +10,8 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
     * iWatch
     * Android Wear
 
+[![NuGet](https://img.shields.io/nuget/v/Acr.Settings.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.Settings/)
+[Change Log - Mar 27, 2018](changelog.md)
 
 ## To use, simply call:
 
