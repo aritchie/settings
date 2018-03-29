@@ -1,14 +1,21 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 
 namespace Acr.Settings.Tests
 {
-    public class TestBind : AbstractSettingObject
+    public class TestBind : INotifyPropertyChanged
     {
         string stringProperty;
         public string StringProperty
         {
             get => this.stringProperty;
-            set => this.SetProperty(ref this.stringProperty, value);
+            set
+            {
+                this.stringProperty = value;
+                this.OnPropertyChanged();
+            }
         }
 
 
@@ -16,7 +23,11 @@ namespace Acr.Settings.Tests
         public Guid? NullableProperty
         {
             get => this.nullProperty;
-            set => this.SetProperty(ref this.nullProperty, value);
+            set
+            {
+                this.nullProperty = value;
+                this.OnPropertyChanged();
+            }
         }
 
 
@@ -25,7 +36,16 @@ namespace Acr.Settings.Tests
         public int? IgnoredProperty
         {
             get => this.ignoredProperty;
-            set => this.SetProperty(ref this.ignoredProperty, value);
+            set
+            {
+                this.ignoredProperty = value;
+                this.OnPropertyChanged();
+            }
         }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
