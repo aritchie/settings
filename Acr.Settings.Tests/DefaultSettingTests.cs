@@ -7,7 +7,7 @@ namespace Acr.Settings.Tests
     {
         public DefaultSettingTests()
         {
-            this.Settings = Acr.Settings.Settings.Current;
+            this.Settings = CrossSettings.Current;
         }
     }
 }

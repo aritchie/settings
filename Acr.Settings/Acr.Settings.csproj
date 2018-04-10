@@ -1,14 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFrameworks></TargetFrameworks>
-        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard1.0;netstandard2.0;net45;net46;net47;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;uap10.0</TargetFrameworks>
-        <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard1.0;netstandard2.0;net45;net46;net47;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;net462;net47;uap10.0</TargetFrameworks>
+        <!--<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;net462;net47;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20;uap10.0</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;net462;net47;MonoAndroid70;MonoAndroid80;Xamarin.iOS10;Xamarin.Mac20</TargetFrameworks>-->
         <Product>ACR Settings Plugin for Xamarin and Windows</Product>
         <Version>9.0.0</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <Authors>aritchie</Authors>
         <Company />
+        <Product>Acr.Settings ($(TargetFramework))</Product>
         <Description>
 Cross Platform Settings Plugin for Xamarin and Windows.  Unlike other setting libraries in the wild, this library provides several unique features
 
@@ -25,84 +27,38 @@ Cross Platform Settings Plugin for Xamarin and Windows.  Unlike other setting li
         <PackageTags>windows uwp winphone android ios xamarin xam.pcl settings</PackageTags>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' OR '$(TargetFramework)' == 'netstandard2.0' ">
-        <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
-        <DefineConstants>$(DefineConstants);NETSTANDARD;BAIT</DefineConstants>
-        <Product>Acr.Settings - .NET Standard</Product>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' OR '$(TargetFramework)' == 'MonoAndroid70' ">
-        <DefineConstants>$(DefineConstants);__ANDROID__</DefineConstants>
-        <Product>Acr.Settings - Android</Product>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
-        <DefineConstants>$(DefineConstants);__IOS__</DefineConstants>
-        <Product>Acr.Settings - iOS</Product>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'xamarin.tvOS10' ">
-        <DefineConstants>$(DefineConstants);__TVOS__</DefineConstants>
-        <Product>Acr.Settings - tvOS</Product>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'Xamarin.Mac20' ">
-        <DefineConstants>$(DefineConstants);__MACOS__</DefineConstants>
-        <Product>Acr.Settings - macOS</Product>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'net45' OR '$(TargetFramework)' == 'net46' OR '$(TargetFramework)' == 'net47' ">
-        <DefineConstants>$(DefineConstants);__NETFX__</DefineConstants>
-        <Product>Acr.Settings - .NET Framework</Product>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'tizen4' ">
-        <DefineConstants>$(DefineConstants);__TIZEN__</DefineConstants>
-        <Product>Acr.Settings - Tizen</Product>
-    </PropertyGroup>
-
     <PropertyGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">
         <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
         <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
-        <DefineConstants>$(DefineConstants);WINDOWS_UWP</DefineConstants>
-        <Product>Acr.Settings - UWP</Product>
     </PropertyGroup>
 
     <ItemGroup>
         <Compile Remove="Platforms\**\*.cs" />
         <None Include="Platforms\**\*.cs" />
         <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
-        <PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.2" PrivateAssets="all" />
+        <PackageReference Include="MSBuild.Sdk.Extras" Version="1.3.1" PrivateAssets="all" />
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' OR '$(TargetFramework)' == 'netstandard2.0' ">
-        <Compile Include="Platforms\Shared\**\*.cs" />
-    </ItemGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' OR '$(TargetFramework)' == 'MonoAndroid70' ">
-        <Compile Include="Platforms\Shared\**\*.cs" />
+    <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' OR '$(TargetFramework)' == 'MonoAndroid80' ">
         <Compile Include="Platforms\Android\**\*.cs" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' OR '$(TargetFramework)' == 'Xamarin.tvOS10' OR '$(TargetFramework)' == 'Xamarin.Mac20' ">
-        <Compile Include="Platforms\Shared\**\*.cs" />
         <Compile Include="Platforms\Apple\**\*.cs" />
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net45' OR '$(TargetFramework)' == 'net46' OR '$(TargetFramework)' == 'net47' ">
-        <Compile Include="Platforms\Shared\**\*.cs" />
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net462' OR '$(TargetFramework)' == 'net47' ">
         <Compile Include="Platforms\NETFramework\**\*.cs" />
         <Reference Include="System.Configuration" />
+        <Reference Include="netstandard" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">
-        <Compile Include="Platforms\Shared\**\*.cs" />
         <Compile Include="Platforms\Uwp\**\*.cs" />
-        <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.5" />
+        <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.8" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'tizen4' ">
-        <Compile Include="Platforms\Shared\**\*.cs" />
         <Compile Include="Platforms\Tizen\**\*.cs" />
         <PackageReference Include="Tizen.NET" Version="4.0.0">
             <ExcludeAssets>Runtime</ExcludeAssets>
