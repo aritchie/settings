@@ -10,36 +10,36 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
     * iWatch
     * Android Wear
 
-[![NuGet](https://img.shields.io/nuget/v/Acr.Settings.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.Settings/)
-[Change Log - Mar 27, 2018](changelog.md)
+[![NuGet](https://img.shields.io/nuget/v/Acr.CrossSettings.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.Settings/)
+[Change Log - April 12, 2018](changelog.md)
 
 ## To use, simply call:
 
-    var int1 = Settings.Current.Get<int>("Key");
-    var int2 = Settings.Current.Get<int?>("Key");
+    var int1 = CrossSettings.Current.Get<int>("Key");
+    var int2 = CrossSettings.Current.Get<int?>("Key");
 
-    Settings.Current.Set("Key", AnyObject); // converts to JSON
-    var obj = Settings.Current.Get<AnyObject>("Key");
+    CrossSettings.Current.Set("Key", AnyObject); // converts to JSON
+    var obj = CrossSettings.Current.Get<AnyObject>("Key");
 
 ## Strongly Typed Binding (works with all platforms - no fancy reflection that breaks on iOS)
 
-    var myInpcObj = Settings.Current.Bind<MyInpcObject>(); // Your object must implement INotifyPropertyChanged
+    var myInpcObj = CrossSettings.Current.Bind<MyInpcObject>(); // Your object must implement INotifyPropertyChanged
     myInpcObj.SomeProperty = "Hi"; // everything is automatically synchronized to settings right here
 
     //From your viewmodel
-    Settings.Current.Bind(this);
+    CrossSettings.Current.Bind(this);
 
     // make sure to unbind when your model is done
-    Settings.Current.UnBind(obj);
+    CrossSettings.Current.UnBind(obj);
 
 ## To supply your own implementation:
 
-    Settings.Current = new YourImplementationInheritingISettings();
+    CrossSettings.Current = new YourImplementationInheritingISettings();
 
 
 ## Monitor setting changes:
 
-    Settings.Current.Changed += (sender, args) => {
+    CrossSettings.Current.Changed += (sender, args) => {
         Console.WriteLine(args.Action);
         Console.WriteLine(args.Key);
         Console.WriteLine(args.Value);
@@ -49,11 +49,11 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
 
 *Autofac*
 
-        containerBuilder.Register(x => Settings.Current).As<ISettings>().SingleInstance();
+        containerBuilder.Register(x => CrossSettings.Current).As<ISettings>().SingleInstance();
 
 *MvvmCross (manual - can use bootstrap below)*
 
-        Mvx.RegisterSingleton(Settings.Current);
+        Mvx.RegisterSingleton(CrossSettings.Current);
 
 
 #### For MvvmCross:
@@ -61,6 +61,6 @@ There is a platform shim for MvvmCross (Acr.MvvmCross.Plugins.Settings).  Roamin
 
 or it can be setup manually.  In each platfor
 
-    Mvx.RegisterSingleton(Acr.Settings.Settings.Current);
+    Mvx.RegisterSingleton(Acr.CrossSettings.CrossSettings.Current);
 
 
