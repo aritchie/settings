@@ -72,7 +72,6 @@ namespace Acr.Settings
                 var typeCode = Type.GetTypeCode(type);
                 switch (typeCode)
                 {
-
                     case TypeCode.Boolean:
                         this.prefs.SetBool((bool)value, key);
                         break;

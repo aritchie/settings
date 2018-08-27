@@ -105,6 +105,16 @@ namespace Acr.Settings.Tests
 
 
         [Fact]
+        public void DateTimeOffsetTest()
+        {
+            var dt = DateTimeOffset.Now.TrimDate();
+            this.Settings.Set("now", dt);
+            var result = this.Settings.Get<DateTimeOffset>("now");
+            Assert.Equal(dt, result);
+        }
+
+
+        [Fact]
         public void SetOverride()
         {
             this.Settings.Set("Test", "1");
@@ -226,5 +236,12 @@ namespace Acr.Settings.Tests
             var obj2 = this.Settings.Bind<TestBind>();
             Assert.True(obj.StringProperty.Equals(obj2.StringProperty));
         }
+    }
+
+
+    public static class Extensions
+    {
+        public static DateTimeOffset TrimDate(this DateTimeOffset dt)
+            => new DateTimeOffset(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Offset);
     }
 }
