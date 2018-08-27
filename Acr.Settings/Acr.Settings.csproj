@@ -20,6 +20,10 @@ Cross Platform Settings Plugin for Xamarin and Windows.  Unlike other setting li
 * You can use roaming profiles which is useful for iOS app groups, iOS extensions, iWatch, and Android Wear
         </Description>
 
+        <RepositoryUrl>https://github.com/aritchie/settings</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <RepositoryUrl>https://github.com/aritchie/settings</RepositoryUrl>
         <PackageProjectUrl>https://github.com/aritchie/settings</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/aritchie/settings/blob/master/LICENSE.md</PackageLicenseUrl>
         <PackageIconUrl>https://github.com/aritchie/settings/raw/master/icon.png</PackageIconUrl>
@@ -44,6 +48,8 @@ Cross Platform Settings Plugin for Xamarin and Windows.  Unlike other setting li
         <Compile Remove="Platforms\**\*.cs" />
         <None Include="Platforms\**\*.cs" />
         <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="all" />
         <PackageReference Include="MSBuild.Sdk.Extras" Version="1.6.47" PrivateAssets="all" />
     </ItemGroup>
 
