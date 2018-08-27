@@ -194,6 +194,9 @@ namespace Acr.Settings
             if (type == typeof(string))
                 return value;
 
+            if (type == typeof(DateTimeOffset))
+                return DateTimeOffset.Parse(value);
+
             if (this.IsStringifyType(type))
                 return Convert.ChangeType(value, type, System.Globalization.CultureInfo.InvariantCulture);
 
