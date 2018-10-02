@@ -10,7 +10,7 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
     * iWatch
     * Android Wear
 
-[![NuGet](https://img.shields.io/nuget/v/Acr.CrossSettings.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.Settings/)
+[![NuGet](https://img.shields.io/nuget/v/Acr.Settings.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.Settings/)
 [Change Log - April 12, 2018](changelog.md)
 
 ## To use, simply call:
@@ -50,17 +50,5 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
 *Autofac*
 
         containerBuilder.Register(x => CrossSettings.Current).As<ISettings>().SingleInstance();
-
-*MvvmCross (manual - can use bootstrap below)*
-
-        Mvx.RegisterSingleton(CrossSettings.Current);
-
-
-#### For MvvmCross:
-There is a platform shim for MvvmCross (Acr.MvvmCross.Plugins.Settings).  Roaming is not currently supported in the shim.
-
-or it can be setup manually.  In each platfor
-
-    Mvx.RegisterSingleton(Acr.CrossSettings.CrossSettings.Current);
 
 
