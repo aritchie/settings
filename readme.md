@@ -13,6 +13,8 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
 [![NuGet](https://img.shields.io/nuget/v/Acr.Settings.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.Settings/)
 [Change Log - April 12, 2018](changelog.md)
 
+### [SUPPORT THIS PROJECT](https://github.com/aritchie/home)
+
 ## To use, simply call:
 
     var int1 = CrossSettings.Current.Get<int>("Key");
@@ -50,5 +52,9 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
 *Autofac*
 
         containerBuilder.Register(x => CrossSettings.Current).As<ISettings>().SingleInstance();
+        
+        OR for strongly typed
+
+        containerBuilder.Register(_ => CrossSettings.Current.Bind<YouAppSettings>()).AsSelf().SingleInstance();
 
 
