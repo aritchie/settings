@@ -1,6 +1,16 @@
 ﻿# ACR Settings Plugin for Xamarin and Windows
 A cross platform settings plugin for Xamarin and Windows.  Unlike other setting libraries in the wild, this library provides several unique features
 
+### [SUPPORT THIS PROJECT](https://github.com/aritchie/home)
+
+
+[Change Log - April 12, 2018](changelog.md)
+
+[![NuGet](https://img.shields.io/nuget/v/Acr.Settings.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.Settings/)
+[![Build status](https://dev.azure.com/allanritchie/Plugins/_apis/build/status/Settings)](https://dev.azure.com/allanritchie/Plugins/_build/latest?definitionId=11)
+
+
+## Features
 * You can store/retrieve just about any type of object (thanks to Newtonsoft.Json)
 * You can monitor for changes using the Changed event
 * iCloud Settings Provider
@@ -9,12 +19,6 @@ A cross platform settings plugin for Xamarin and Windows.  Unlike other setting 
     * iOS extensions
     * iWatch
     * Android Wear
-
-[![NuGet](https://img.shields.io/nuget/v/Acr.Settings.svg?maxAge=2592000)](https://www.nuget.org/packages/Acr.Settings/)
-[Change Log - April 12, 2018](changelog.md)
-[![Build status](https://allanritchie.visualstudio.com/Plugins/_apis/build/status/Settings)](https://allanritchie.visualstudio.com/Plugins/_build/latest?definitionId=0)
-
-### [SUPPORT THIS PROJECT](https://github.com/aritchie/home)
 
 ## To use, simply call:
 
