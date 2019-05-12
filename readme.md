@@ -1,4 +1,6 @@
-﻿# ACR Settings Plugin for Xamarin and Windows
+# UPDATE - This library has now moved to the Shiny Framework at https://github.com/shinyorg/shiny
+
+## ACR Settings Plugin for Xamarin and Windows
 A cross platform settings plugin for Xamarin and Windows.  Unlike other setting libraries in the wild, this library provides several unique features
 
 ### [SUPPORT THIS PROJECT](https://github.com/aritchie/home)
